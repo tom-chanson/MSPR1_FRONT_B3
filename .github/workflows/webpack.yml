@@ -5,6 +5,7 @@ on:
     branches: [ "master" ]
   pull_request:
     branches: [ "master" ]
+  workflow_dispatch:
 
 jobs:
   build:
@@ -22,7 +23,14 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
 
-    - name: Build
+    - name: Install
       run: |
         npm install
+
+    - name: Eslint
+      run: |
+        npx eslint --ext .tsx,.ts src/
+
+    - name: Build
+      run: |
         npm run build
