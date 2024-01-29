@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import useSignIn from 'react-auth-kit/hooks/useSignIn';
-import { IAuthResponse, IUserData } from './interface';
+import { IAuthResponse, IUserData } from '../interface';
 import { Link } from 'react-router-dom';
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { RiErrorWarningFill } from "react-icons/ri";
 import { useNavigate } from 'react-router-dom';
-import { RequestHelper } from './helper/request';
+import { RequestHelper } from '../helpers/request';
 
 
 

@@ -1,4 +1,4 @@
-import './App.css';
+import './styles/App.css';
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 
 import createStore from 'react-auth-kit/createStore';
@@ -7,8 +7,9 @@ import AuthOutlet from '@auth-kit/react-router/AuthOutlet';
 
 import { IUserData } from './interface';
 
-import Login from './login';
-import Register from './register';
+import Login from './pages/login';
+import Register from './pages/register';
+import Home from "./pages/home";
 
 const store = createStore<IUserData>({
   authName:'_auth',
@@ -22,7 +23,7 @@ function App() {
     <AuthProvider store={store}>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<div>Home</div>} id='home'/>
+          <Route path="/" element={<Home />} id='home'/>
           <Route path="/login" element={<Login />} id='login'/>
           <Route path="/register" element={<Register/>} id='register'/>
           <Route element={<AuthOutlet fallbackPath='/login' />}>
