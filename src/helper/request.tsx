@@ -1,6 +1,6 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { API_URL } from '../constants';
-import { RequestMethod, IRequestHeader } from '../interface';
+import { RequestMethod, RequestHeader } from '../interface';
 import useAuthHeader from 'react-auth-kit/hooks/useAuthHeader';
 
 
@@ -16,7 +16,7 @@ function RequestAuthHelper<T>(method: RequestMethod, route: string, auth: string
     if (data) {
         data = JSON.stringify(data);
     }
-    const headers: IRequestHeader = {
+    const headers: RequestHeader = {
         'Content-Type': 'application/json',
     };
     if (auth) {
