@@ -1,25 +1,36 @@
-import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import {BrowserRouter, Routes, Route} from "react-router-dom";
+
+import createStore from 'react-auth-kit/createStore';
+import AuthProvider from 'react-auth-kit';
+import AuthOutlet from '@auth-kit/react-router/AuthOutlet';
+
+import { IUserData } from './interface';
+
+import Login from './login';
+import Register from './register';
+
+const store = createStore<IUserData>({
+  authName:'_auth',
+  authType:'cookie',
+  cookieDomain: window.location.hostname,
+  cookieSecure: window.location.protocol === 'https:',
+});
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AuthProvider store={store}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<div>Home</div>} id='home'/>
+          <Route path="/login" element={<Login />} id='login'/>
+          <Route path="/register" element={<Register/>} id='register'/>
+          <Route element={<AuthOutlet fallbackPath='/login' />}>
+            <Route path="/some" element={<h1>Route qui nécessite d'être authentifié</h1>} id='some'/>
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
   );
 }
 

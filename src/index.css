@@ -1,13 +1,129 @@
-body {
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+*{
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+body{
+  min-height: 100vh;
+  width: 100%;
+}
+
+.container-auth{
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #009579;
+}
+
+.container{
+  margin: 0 1rem;
+  max-width: 430px;
+  width: 100%;
+  background: #fff;
+  border-radius: 7px;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.3);
+}
+
+.container .auth-form{
+  padding: 2rem;
+}
+.auth-form .title{
+  font-size: 2rem;
+  font-weight: 500;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+ input, button[type="submit"]{
+  height: 40px;
+   padding: 0 15px;
+   font-size: 17px;
+   margin-bottom: 1.3rem;
+   border: 1px solid #ddd;
+   border-radius: 6px;
+   outline: none;
+   width: 100%;
+ }
+
+ .auth-form input, .auth-form button[type="submit"]{
+   height: 60px;
+   vertical-align: middle;
+ }
+
+ input:focus, button[type="submit"]:focus{
+   box-shadow: 0 1px 0 rgba(0,0,0,0.2);
+ }
+.auth-form a{
+  font-size: 16px;
+  color: #009579;
+  text-decoration: none;
+}
+.auth-form a:hover{
+  text-decoration: underline;
+}
+button[type="submit"]{
+  color: #fff;
+  background: #009579;
+  font-size: 1.2rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+  margin-top: 1.7rem;
+  cursor: pointer;
+  transition: 0.4s;
+}
+button[type="submit"]:disabled{
+  background: #777;
+  cursor: not-allowed;
+}
+button[type="submit"]:hover, .auth-form input.btn-auth-form:hover{
+  background: #999;
+}
+
+
+.auth-form input.btn-auth-form:enabled:hover, .auth-form button[type="submit"]:enabled:hover{
+  background: #006653;
+}
+.signup{
+  font-size: 17px;
+  text-align: center;
+}
+.signup label{
+  color: #009579;
+  cursor: pointer;
+}
+.signup label:hover{
+  text-decoration: underline;
+}
+
+.loading{
+  color: #fff;
+  /* faire tourner continuellement */
+    animation: loading 1s linear infinite;
+    display: inline-block;
+}
+
+@keyframes loading{
+  from{
+    transform: rotate(0deg);
+  }
+  to{
+    transform: rotate(360deg);
+  }
+}
+
+.container-error {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: crimson;
+}
+
+.container-error span:last-child{
+  margin-bottom: 1rem;
 }
