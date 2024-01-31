@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import useSignIn from 'react-auth-kit/hooks/useSignIn';
-import { UtilisateurConnexion, IUserData } from './interface';
+import { UtilisateurConnexion, IUserData } from '../interface';
 import { Link } from 'react-router-dom';
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { RiErrorWarningFill } from "react-icons/ri";
 import { useNavigate } from 'react-router-dom';
-import { RequestHelper } from './helper/request';
+import { RequestHelper } from '../helpers/request';
 
 
 
@@ -157,7 +157,7 @@ function Register () {
                     <button  type='submit' className='btn-auth-form' disabled={disabled}>{loading ? <AiOutlineLoading3Quarters className='loading'/> : null} S'inscrire</button>
                 </form>
                 <div className="signup">
-                    <span className='signup'>Pas encore de compte ? </span><Link to='/login' >S'inscrire</Link>
+                    <span className='signup'>Pas encore de compte ? </span><Link to='/signup' >S'inscrire</Link>
                 </div>
             </div>
         </div>
@@ -166,3 +166,4 @@ function Register () {
 };
 
 export default Register;
+

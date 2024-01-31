@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import useSignIn from 'react-auth-kit/hooks/useSignIn';
-import { UtilisateurConnexion, IUserData } from './interface';
+import { UtilisateurConnexion, IUserData } from '../interface';
 import { Link, useNavigate } from 'react-router-dom';
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
-import { RequestHelper } from './helper/request';
+import { RequestHelper } from '../helpers/request';
 
 
 
