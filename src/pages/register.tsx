@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import useSignIn from 'react-auth-kit/hooks/useSignIn';
-import { IAuthResponse, IUserData } from '../interface';
+import { UtilisateurConnexion, IUserData } from '../interface';
 import { Link } from 'react-router-dom';
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { RiErrorWarningFill } from "react-icons/ri";
@@ -101,7 +101,7 @@ function Register () {
                 password: password,
             };
             try {
-                const response = await RequestHelper<IAuthResponse>('POST', '/register', formData);
+                const response = await RequestHelper<UtilisateurConnexion>('POST', '/register', formData);
                 if (response.status === 200) {
                     if (signIn({
                         auth: {
@@ -166,3 +166,4 @@ function Register () {
 };
 
 export default Register;
+

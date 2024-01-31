@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import useSignIn from 'react-auth-kit/hooks/useSignIn';
-import { IAuthResponse, IUserData } from '../interface';
+import { UtilisateurConnexion, IUserData } from '../interface';
 import { Link, useNavigate } from 'react-router-dom';
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { RequestHelper } from '../helpers/request';
@@ -32,7 +32,7 @@ function Login () {
                 password: password,
             };
             try {
-                const response = await RequestHelper<IAuthResponse>('POST', '/login', formData);
+                const response = await RequestHelper<UtilisateurConnexion>('POST', '/login', formData);
                 if (response.status === 200) {
                     if (signIn({
                         auth: {
