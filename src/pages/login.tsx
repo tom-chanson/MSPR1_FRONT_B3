@@ -60,7 +60,7 @@ function Login () {
                 <form onSubmit={handleSubmit}>
                     <input type='email' placeholder='Email' value={email} onChange={handleEmailChange} autoComplete='email' name='email'/>
                     <input type='password' placeholder='Mot de passe' value={password} onChange={handlePasswordChange} autoComplete='current-password' name='password'/>
-                    <button  type='submit' className='btn-auth-form' disabled={loading}>{loading ? <AiOutlineLoading3Quarters className='loading'/> : null} Se connecter</button>
+                    <button  type='submit' className='btn-auth-form btn-auth-form-submit' disabled={loading}>{loading ? <AiOutlineLoading3Quarters className='loading'/> : null} Se connecter</button>
                 </form>
                 <div className="signup">
                     <span className='signup'>Pas encore de compte ? </span><Link to='/register' >S'inscrire</Link>
