@@ -1,0 +1,13 @@
+.container-view-article{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    padding: 1rem;
+    background: #EEEEEE;
+
+    .container-preview-article{
+        flex: 1;
+    }
+}
