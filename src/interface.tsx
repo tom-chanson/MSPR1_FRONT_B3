@@ -140,16 +140,19 @@ export interface PlantePost{
     image?: Blob;
 }
 
-export interface Biliotheque{
+export interface Image{
     image_url: string;
     titre: string;
 }
 
 export interface ListeBiliotheque{
-    biliotheques: Biliotheque[];
+    biliotheques: Image[];
 }
 
-export interface BilbiothequePost{
-    titre: string;
+export interface ImagePost{
     image: Blob;
+}
+
+export interface ImagePostReponse{
+    image_url: string;
 }

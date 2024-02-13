@@ -1,7 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
 *{
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
 }
@@ -9,6 +7,8 @@
 body{
   min-height: 100vh;
   width: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 .container-auth{
@@ -19,6 +19,13 @@ body{
   justify-content: center;
   align-items: center;
   background: #009579;
+}
+
+.container-page{
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  background: #f5f5f5;
 }
 
 .container{
@@ -39,7 +46,7 @@ body{
   text-align: center;
   margin-bottom: 1.5rem;
 }
- input, button[type="submit"]{
+.auth-form input, .btn-auth-form-submit{
   height: 40px;
    padding: 0 15px;
    font-size: 17px;
@@ -50,7 +57,7 @@ body{
    width: 100%;
  }
 
- .auth-form input, .auth-form button[type="submit"]{
+ .auth-form input, .btn-auth-form-submit{
    height: 60px;
    vertical-align: middle;
  }
@@ -66,7 +73,7 @@ body{
 .auth-form a:hover{
   text-decoration: underline;
 }
-button[type="submit"]{
+.btn-auth-form-submit{
   color: #fff;
   background: #009579;
   font-size: 1.2rem;
@@ -80,12 +87,12 @@ button[type="submit"]:disabled{
   background: #777;
   cursor: not-allowed;
 }
-button[type="submit"]:hover, .auth-form input.btn-auth-form:hover{
+.btn-auth-form-submit:hover, .auth-form input.btn-auth-form:hover{
   background: #999;
 }
 
 
-.auth-form input.btn-auth-form:enabled:hover, .auth-form button[type="submit"]:enabled:hover{
+.auth-form input.btn-auth-form:enabled:hover, .btn-auth-form-submit:enabled:hover{
   background: #006653;
 }
 .signup{
@@ -101,7 +108,8 @@ button[type="submit"]:hover, .auth-form input.btn-auth-form:hover{
 }
 
 .loading{
-  color: #fff;
+  height: 1.2rem;
+  width: 1.2rem;
   /* faire tourner continuellement */
     animation: loading 1s linear infinite;
     display: inline-block;
