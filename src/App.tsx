@@ -10,6 +10,7 @@ import { IUserData } from './interface';
 import Login from './pages/login';
 import Register from './pages/register';
 import Home from "./pages/home";
+import EditArticle from './pages/editArticle';
 
 const store = createStore<IUserData>({
   authName:'_auth',
@@ -26,6 +27,8 @@ function App() {
           <Route path="/" element={<Home />} id='home'/>
           <Route path="/login" element={<Login />} id='login'/>
           <Route path="/register" element={<Register/>} id='register'/>
+          <Route path="/edit-article" element={<EditArticle/>} id='edit-article'/>
+          <Route path="/edit-article/:id" element={<EditArticle />} id='edit-article-id'/>
           <Route element={<AuthOutlet fallbackPath='/login' />}>
             <Route path="/some" element={<h1>Route qui nécessite d'être authentifié</h1>} id='some'/>
           </Route>

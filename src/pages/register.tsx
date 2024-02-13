@@ -154,7 +154,7 @@ function Register () {
                         {!errorPassword.confirmPassword ? <span className='error'><RiErrorWarningFill/> Les mots de passe ne correspondent pas</span> : null}
                     </div>
                     : null}
-                    <button  type='submit' className='btn-auth-form' disabled={disabled}>{loading ? <AiOutlineLoading3Quarters className='loading'/> : null} S'inscrire</button>
+                    <button  type='submit' className='btn-auth-form btn-auth-form-submit' disabled={disabled}>{loading ? <AiOutlineLoading3Quarters className='loading'/> : null} S'inscrire</button>
                 </form>
                 <div className="signup">
                     <span className='signup'>Pas encore de compte ? </span><Link to='/signup' >S'inscrire</Link>
