@@ -10,6 +10,7 @@ import { IUserData } from './interface';
 import Login from './pages/login';
 import Register from './pages/register';
 import Home from "./pages/home";
+import Navbar from "./components/navbar/navbar";
 import EditArticle from './pages/editArticle';
 import ViewArticle from './pages/viewArticle';
 
@@ -24,6 +25,7 @@ function App() {
   return (
     <AuthProvider store={store}>
       <BrowserRouter>
+        <Navbar/>
         <Routes>
           <Route path="/" element={<Home />} id='home'/>
           <Route path="/login" element={<Login />} id='login'/>
