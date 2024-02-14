@@ -42,13 +42,6 @@ export default function EditArticle() {
         console.log(e.target.value);
     };
 
-    // useEffect(() => {
-    //     getArticle().then((text) => {
-    //         setMarkdownText(text);
-    //     });
-    // }, []);
-
-
     return (
         <div className='container-page'>
             <div className={"container-edit-preview-article view-" + editorView + "-article"}>

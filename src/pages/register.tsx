@@ -6,6 +6,8 @@ import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { RiErrorWarningFill } from "react-icons/ri";
 import { useNavigate } from 'react-router-dom';
 import { RequestHelper } from '../helpers/request';
+import "../styles/loginRegister.css"
+
 
 
 
@@ -123,7 +125,7 @@ function Register () {
 
     return (
 <div className='container-auth'>
-        <div className="container">
+        <div className="container-login-register">
             <div className="auth-form">
                 <h1 className='title'>Se connecter</h1>
                 <form onSubmit={handleSubmit}>

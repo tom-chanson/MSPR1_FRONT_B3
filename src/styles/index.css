@@ -11,100 +11,23 @@ body{
   padding: 0;
 }
 
-.container-auth{
-  position: relative;
-  min-height: 100vh;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #009579;
-}
-
 .container-page{
-  height: 100vh;
+  height: 100%;
   width: 100%;
   display: flex;
   background: #f5f5f5;
 }
 
-.container{
-  margin: 0 1rem;
-  max-width: 430px;
-  width: 100%;
-  background: #fff;
-  border-radius: 7px;
-  box-shadow: 0 5px 10px rgba(0,0,0,0.3);
-}
-
-.container .auth-form{
-  padding: 2rem;
-}
-.auth-form .title{
-  font-size: 2rem;
-  font-weight: 500;
-  text-align: center;
-  margin-bottom: 1.5rem;
-}
-.auth-form input, .btn-auth-form-submit{
-  height: 40px;
-   padding: 0 15px;
-   font-size: 17px;
-   margin-bottom: 1.3rem;
-   border: 1px solid #ddd;
-   border-radius: 6px;
-   outline: none;
-   width: 100%;
- }
-
- .auth-form input, .btn-auth-form-submit{
-   height: 60px;
-   vertical-align: middle;
- }
-
  input:focus, button[type="submit"]:focus{
    box-shadow: 0 1px 0 rgba(0,0,0,0.2);
  }
-.auth-form a{
-  font-size: 16px;
-  color: #009579;
-  text-decoration: none;
-}
-.auth-form a:hover{
-  text-decoration: underline;
-}
-.btn-auth-form-submit{
-  color: #fff;
-  background: #009579;
-  font-size: 1.2rem;
-  font-weight: 500;
-  letter-spacing: 1px;
-  margin-top: 1.7rem;
-  cursor: pointer;
-  transition: 0.4s;
-}
+
 button[type="submit"]:disabled{
   background: #777;
   cursor: not-allowed;
 }
 .btn-auth-form-submit:hover, .auth-form input.btn-auth-form:hover{
   background: #999;
-}
-
-
-.auth-form input.btn-auth-form:enabled:hover, .btn-auth-form-submit:enabled:hover{
-  background: #006653;
-}
-.signup{
-  font-size: 17px;
-  text-align: center;
-}
-.signup label{
-  color: #009579;
-  cursor: pointer;
-}
-.signup label:hover{
-  text-decoration: underline;
 }
 
 .loading{
