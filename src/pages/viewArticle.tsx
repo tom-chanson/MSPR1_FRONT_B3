@@ -18,6 +18,7 @@ useEffect(() => {
         RequestHelper<Article>('GET', '/article/' + params.id).then((response) => {
             if (response.status === 200) {
                 setLoading(false);
+                console.log(response.data.contenu);
                 setMarkdownText(response.data.contenu);
             } else {
                 console.error(response);
@@ -30,6 +31,7 @@ useEffect(() => {
     } else {
         setLoading(false);
     }
+// eslint-disable-next-line react-hooks/exhaustive-deps
 }, []);
 
 return (

@@ -4,6 +4,7 @@ import { UtilisateurConnexion, IUserData } from '../interface';
 import { Link, useNavigate } from 'react-router-dom';
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { RequestHelper } from '../helpers/request';
+import "../styles/loginRegister.css"
 
 
 
@@ -54,7 +55,7 @@ function Login () {
 
     return (
 <div className='container-auth'>
-        <div className="container">
+        <div className="container-login-register">
             <div className="auth-form">
                 <h1 className='title'>Se connecter</h1>
                 <form onSubmit={handleSubmit}>

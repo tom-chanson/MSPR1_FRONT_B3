@@ -29,7 +29,7 @@ export default function Home() {
             />
 
             {markers.map(marker => (
-                <Marker position={marker.geocode} icon={customIcon}>
+                <Marker position={marker.geocode} icon={customIcon} key={Math.random()}>
                     <Popup>{marker.popUp}</Popup>
                 </Marker>
             ))}
