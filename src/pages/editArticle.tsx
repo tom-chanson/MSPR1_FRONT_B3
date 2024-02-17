@@ -6,7 +6,8 @@ import { Article } from '../interface';
 import { RequestHelperAuth } from '../helpers/request';
 import { useParams } from 'react-router-dom';
 import useAuthHeader from 'react-auth-kit/hooks/useAuthHeader';
-
+import { templateArticle } from '../constants';
+import { route_api } from '../constants';
 
 export default function EditArticle() {
     const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -16,9 +17,10 @@ export default function EditArticle() {
     const [markdownText, setMarkdownText] = useState('');
     const authHeader = useAuthHeader();
 
+
     useEffect(() => {
     if (params.id && loading && authHeader) {
-        RequestHelperAuth<Article>('GET', '/article/' + params.id, authHeader).then((response) => {
+        RequestHelperAuth<Article>('GET', route_api.article + params.id, authHeader).then((response) => {
             if (response.status === 200) {
                 setLoading(false);
                 setMarkdownText(response.data.contenu);
@@ -32,14 +34,15 @@ export default function EditArticle() {
         });
     } else {
         setLoading(false);
+        setMarkdownText(templateArticle);
     }
-}, [params.id, loading, authHeader]);
+// eslint-disable-next-line react-hooks/exhaustive-deps
+}, [params.id, authHeader]);
 
 
 
     const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         setMarkdownText(e.target.value);
-        console.log(e.target.value);
     };
 
     return (

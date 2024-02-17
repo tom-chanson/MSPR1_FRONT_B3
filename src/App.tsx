@@ -13,6 +13,7 @@ import Home from "./pages/home";
 import Navbar from "./components/navbar/navbar";
 import EditArticle from './pages/editArticle';
 import ViewArticle from './pages/viewArticle';
+import ListArticle from './pages/listArticle';
 
 const store = createStore<IUserData>({
   authName:'_auth',
@@ -30,6 +31,7 @@ function App() {
           <Route path="/" element={<Home />} id='home'/>
           <Route path="/login" element={<Login />} id='login'/>
           <Route path="/register" element={<Register/>} id='register'/>
+          <Route path="/article" element={<ListArticle />} id='list-article'/>
           <Route path="/article/:id" element={<ViewArticle />} id='article-id'/>
           <Route path="/edit-article" element={<EditArticle/>} id='edit-article'/>
           <Route path="/edit-article/:id" element={<EditArticle />} id='edit-article-id'/>

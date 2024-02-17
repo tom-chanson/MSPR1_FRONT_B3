@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { RequestHelper } from '../helpers/request';
 import "../styles/loginRegister.css"
-
+import { route_api } from '../constants';
 
 
 
@@ -33,7 +33,7 @@ function Login () {
                 password: password,
             };
             try {
-                const response = await RequestHelper<UtilisateurConnexion>('POST', '/login', formData);
+                const response = await RequestHelper<UtilisateurConnexion>('POST', route_api.login, formData);
                 if (response.status === 200) {
                     if (signIn({
                         auth: {
