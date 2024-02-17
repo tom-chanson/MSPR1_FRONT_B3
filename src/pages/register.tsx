@@ -7,7 +7,7 @@ import { RiErrorWarningFill } from "react-icons/ri";
 import { useNavigate } from 'react-router-dom';
 import { RequestHelper } from '../helpers/request';
 import "../styles/loginRegister.css"
-
+import { route_api } from '../constants';
 
 
 
@@ -103,7 +103,7 @@ function Register () {
                 password: password,
             };
             try {
-                const response = await RequestHelper<UtilisateurConnexion>('POST', '/register', formData);
+                const response = await RequestHelper<UtilisateurConnexion>('POST', route_api.register, formData);
                 if (response.status === 200) {
                     if (signIn({
                         auth: {

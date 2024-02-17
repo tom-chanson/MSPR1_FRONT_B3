@@ -156,3 +156,7 @@ export interface ImagePost{
 export interface ImagePostReponse{
     image_url: string;
 }
+
+export interface ListArticleOrderByAlphabet {
+    [letter: string]: string[];
+}

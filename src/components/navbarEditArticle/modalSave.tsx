@@ -6,6 +6,7 @@ import { buildText } from "../../utils/editArticle";
 import useAuthHeader from "react-auth-kit/hooks/useAuthHeader";
 import { ArticlePost } from "../../interface";
 import { RequestHelperAuth } from "../../helpers/request";
+import { route_api } from "../../constants";
 
 export default function ModalSave(props: { 
     setMarkdownText: (text: string) => void, 
@@ -74,7 +75,7 @@ export default function ModalSave(props: {
                 titre: titleArticle,
                 contenu: props.textareaRef.current!.value
             }
-            const url = props.idArticle ? '/article/' + props.idArticle : '/article';
+            const url = props.idArticle ? route_api.article + props.idArticle : route_api.create_article;
             RequestHelperAuth<ArticlePost>('POST', url, authHeader, formData).then((response) => {
                 if (response.status === 200) {
                     console.log('article sauvegardé');
