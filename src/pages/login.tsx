@@ -4,7 +4,8 @@ import { UtilisateurConnexion, IUserData } from '../interface';
 import { Link, useNavigate } from 'react-router-dom';
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { RequestHelper } from '../helpers/request';
-
+import "../styles/loginRegister.css"
+import { route_api } from '../constants';
 
 
 
@@ -32,7 +33,7 @@ function Login () {
                 password: password,
             };
             try {
-                const response = await RequestHelper<UtilisateurConnexion>('POST', '/login', formData);
+                const response = await RequestHelper<UtilisateurConnexion>('POST', route_api.login, formData);
                 if (response.status === 200) {
                     if (signIn({
                         auth: {
@@ -54,13 +55,13 @@ function Login () {
 
     return (
 <div className='container-auth'>
-        <div className="container">
+        <div className="container-login-register">
             <div className="auth-form">
                 <h1 className='title'>Se connecter</h1>
                 <form onSubmit={handleSubmit}>
                     <input type='email' placeholder='Email' value={email} onChange={handleEmailChange} autoComplete='email' name='email'/>
                     <input type='password' placeholder='Mot de passe' value={password} onChange={handlePasswordChange} autoComplete='current-password' name='password'/>
-                    <button  type='submit' className='btn-auth-form' disabled={loading}>{loading ? <AiOutlineLoading3Quarters className='loading'/> : null} Se connecter</button>
+                    <button  type='submit' className='btn-auth-form btn-auth-form-submit' disabled={loading}>{loading ? <AiOutlineLoading3Quarters className='loading'/> : null} Se connecter</button>
                 </form>
                 <div className="signup">
                     <span className='signup'>Pas encore de compte ? </span><Link to='/register' >S'inscrire</Link>

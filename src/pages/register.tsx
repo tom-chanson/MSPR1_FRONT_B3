@@ -6,6 +6,8 @@ import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { RiErrorWarningFill } from "react-icons/ri";
 import { useNavigate } from 'react-router-dom';
 import { RequestHelper } from '../helpers/request';
+import "../styles/loginRegister.css"
+import { route_api } from '../constants';
 
 
 
@@ -101,7 +103,7 @@ function Register () {
                 password: password,
             };
             try {
-                const response = await RequestHelper<UtilisateurConnexion>('POST', '/register', formData);
+                const response = await RequestHelper<UtilisateurConnexion>('POST', route_api.register, formData);
                 if (response.status === 200) {
                     if (signIn({
                         auth: {
@@ -123,7 +125,7 @@ function Register () {
 
     return (
 <div className='container-auth'>
-        <div className="container">
+        <div className="container-login-register">
             <div className="auth-form">
                 <h1 className='title'>Se connecter</h1>
                 <form onSubmit={handleSubmit}>
@@ -154,7 +156,7 @@ function Register () {
                         {!errorPassword.confirmPassword ? <span className='error'><RiErrorWarningFill/> Les mots de passe ne correspondent pas</span> : null}
                     </div>
                     : null}
-                    <button  type='submit' className='btn-auth-form' disabled={disabled}>{loading ? <AiOutlineLoading3Quarters className='loading'/> : null} S'inscrire</button>
+                    <button  type='submit' className='btn-auth-form btn-auth-form-submit' disabled={disabled}>{loading ? <AiOutlineLoading3Quarters className='loading'/> : null} S'inscrire</button>
                 </form>
                 <div className="signup">
                     <span className='signup'>Pas encore de compte ? </span><Link to='/signup' >S'inscrire</Link>
