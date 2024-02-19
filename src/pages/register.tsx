@@ -64,10 +64,19 @@ function Register () {
     }
 
     useEffect(() => {
-        if (errorEmail.emailExist && errorEmail.emailValid && password.length > 0 && username.length > 0 && confirmPassword.length > 0 && password === confirmPassword && !loading) {
+        console.log(errorEmail)
+        console.log(password)
+        console.log(username)
+        console.log(confirmPassword)
+        console.log(confirmPassword.length > 0)
+        console.log(loading)
+        console.log(errorEmail.emailExist && errorEmail.emailValid && password.length > 0 )
+        if (!errorEmail.emailExist && errorEmail.emailValid && password.length > 0 && username.length > 0 && confirmPassword.length > 0 && password === confirmPassword && !loading) {
             setDisabled(false);
+            console.log('test - disabled false');
         } else {
             setDisabled(true);
+            console.log('test - disabled true');
         }    }, [email, password, username, confirmPassword, loading, errorEmail])
 
     useEffect(() => {
@@ -94,20 +103,31 @@ function Register () {
     }, [email])
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
         if (!disabled) {
-            e.preventDefault();
             setLoading(true);
             const formData = {
-                email: email,
+                mail: email,
                 name: username,
                 password: password,
             };
             try {
-                const response = await RequestHelper<UtilisateurConnexion>('POST', route_api.register, formData);
+                // const response = await RequestHelper<UtilisateurConnexion>('POST', route_api.register, formData);
+                const response = await RequestHelper<any>('POST', route_api.register, formData);
                 if (response.status === 200) {
+                    console.log(response);
+
+                    // Création d'un faux jeton pour test. Le jeton doit être au format jwt
+                    const now = Math.floor(Date.now() / 1000);
+                    const oneDayFromNow = now + 60 * 60 * 24;
+                    const header = btoa(JSON.stringify({ alg: "HS256", typ: "JWT" }));
+                    const payload = btoa(JSON.stringify({ id: response.data.id, name: response.data.name, mail: response.data.mail, exp: oneDayFromNow }));
+                    const signature = 'fake-signature';
+                    const fakeToken = `${header}.${payload}.${signature}`;
                     if (signIn({
                         auth: {
-                            token: response.data.token
+                            /* faux jeton pour test. Le jeton doit être au format jwt */
+                            token: fakeToken
                         }
                     }))
                     navigate('/some'); //TODO: modifier la redirection
@@ -127,7 +147,7 @@ function Register () {
 <div className='container-auth'>
         <div className="container-login-register">
             <div className="auth-form">
-                <h1 className='title'>Se connecter</h1>
+                <h1 className='title'>S'inscrire</h1>
                 <form onSubmit={handleSubmit}>
                     <input type='email' placeholder='Email' value={email} onInput={handleEmailChange} autoComplete='email'/>
                     {errorEmail.showError ?
@@ -156,10 +176,10 @@ function Register () {
                         {!errorPassword.confirmPassword ? <span className='error'><RiErrorWarningFill/> Les mots de passe ne correspondent pas</span> : null}
                     </div>
                     : null}
-                    <button  type='submit' className='btn-auth-form btn-auth-form-submit' disabled={disabled}>{loading ? <AiOutlineLoading3Quarters className='loading'/> : null} S'inscrire</button>
+                    <button type='submit' className='btn-auth-form btn-auth-form-submit'>{loading ? <AiOutlineLoading3Quarters className='loading'/> : null} S'inscrire</button>
                 </form>
                 <div className="signup">
-                    <span className='signup'>Pas encore de compte ? </span><Link to='/signup' >S'inscrire</Link>
+                    <span className='signup'>Déja un compte ? </span><Link to='/login' >Se connecter</Link>
                 </div>
             </div>
         </div>

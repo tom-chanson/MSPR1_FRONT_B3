@@ -1,4 +1,4 @@
-export const API_URL = 'http://localhost:3001';
+export const API_URL = 'http://localhost:8080';
 
 export const templateArticle = `# [Nom de la plante]
 
@@ -57,5 +57,7 @@ export const route_api = {
     list_articles : "/article/all",
     article : "/article/",
     create_article : "/article/one",
-    library_image : "/bibliotheque",
+    library_image : "/bibliotheque/me",
+    post_image : "/image",
+    post_image_biblioteque : "/bibliotheque/one",
 }

@@ -1,15 +1,17 @@
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Modal from "@mui/material/Modal";
-import { useEffect, useState } from "react";
-import { RequestHelperAuth } from "../../helpers/request";
+import { useEffect, useRef, useState } from "react";
+import { RequestHelperAuth, RequestHelperAuthImage } from "../../helpers/request";
 import Button from "@mui/material/Button";
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import '../../styles/libraryImage.css';
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import useAuthHeader from 'react-auth-kit/hooks/useAuthHeader';
+import useAuthUser from "react-auth-kit/hooks/useAuthUser";
 import TextField from "@mui/material/TextField";
-import { ImagePost, ImagePostReponse } from "../../interface";
+import { ImagePost, ImagePostBiblioteque, ImagePostReponse, Image } from "../../interface";
+import { route_api } from "../../constants";
 
 
 
@@ -18,13 +20,21 @@ export default function LibraryImage(props: {open: boolean, setOpen: (open: bool
     const [images, setImages] = useState<string[]>([]);
     const [modalTitleOpen, setModalTitleOpen] = useState(false);
     const [loading, setLoading] = useState(true);
-    const authHeader = useAuthHeader();
+    // const authHeader = useAuthHeader();
+    const authUser: any = useAuthUser();
+    const authHeader = authUser.id;
+
+    const refInputFile = useRef<HTMLInputElement>(null);
 
     useEffect(() => {
     if (loading && authHeader) {
-        RequestHelperAuth<string[]>('GET', '/image', authHeader).then((response) => {
+        RequestHelperAuth<Image[]>('GET', route_api.library_image, authHeader).then((response) => {
+            const tempImages: string[] = [];
             if (response.status === 200) {
-                setImages(response.data);
+                response.data.forEach((image: Image) => {
+                    tempImages.push(image.image_url);
+                });
+                setImages(tempImages);
             } else {
                 console.warn(response);
             }
@@ -53,17 +63,28 @@ export default function LibraryImage(props: {open: boolean, setOpen: (open: bool
     const FormSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         console.log('submit');
         e.preventDefault();
-        if (authHeader && fileInput && title) {
-            const fileRename = new File([fileInput], title, {type: fileInput.type});
-            const formData: ImagePost = {
-                image: fileRename
-            }
-            RequestHelperAuth<ImagePostReponse>('POST', '/image', authHeader, formData).then((response) => {
+        if (authHeader && fileInput && title && refInputFile.current!.files) {
+            const file = refInputFile.current!.files[0];
+            const formData = new FormData();
+            formData.set('image', file);
+            console.log(formData);
+            RequestHelperAuthImage<ImagePostReponse>('POST', route_api.post_image, authHeader, formData).then((response) => {
                 if (response.status === 200) {
-                    setImages([...images, response.data.image_url]);
-                    setModalTitleOpen(false);
-                    props.setOpen(false);
-                    props.addInNewLine('![](' + response.data.image_url + ')' , 3);
+                    const dataImageBilblio: ImagePostBiblioteque = {
+                        image_url: response.data.url,
+                        titre: title
+                    }
+                    RequestHelperAuth<ImagePostBiblioteque>('POST', route_api.post_image_biblioteque, authHeader, dataImageBilblio).then((response_image) => {
+                        if (response_image.status === 200) {
+                            setImages([...images, response.data.url]);
+                            setModalTitleOpen(false);
+                            props.setOpen(false);
+                        } else {
+                            console.warn(response_image);
+                        }
+                    }).catch((error) => {
+                        console.warn(error);
+                    });
                 } else {
                     console.warn(response);
                 }
@@ -91,7 +112,7 @@ export default function LibraryImage(props: {open: boolean, setOpen: (open: bool
                 <h2>Bibliothèque d'image</h2>
                     <Button component="label" variant="contained" startIcon={<CloudUploadIcon />}>
                         Ajouter une/des image(s)
-                    <input type="file" className="visuallyHiddenInput" onChange={addImage} accept="image/*" required/>
+                    <input type="file" className="visuallyHiddenInput" onChange={addImage} accept="image/*" required ref={refInputFile}/>
                     </Button>
                     <Modal open={modalTitleOpen} onClose={() => setModalTitleOpen(false)} className='modal modal-form'>
                         <div className='modal-content'>

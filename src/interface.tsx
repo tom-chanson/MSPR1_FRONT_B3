@@ -1,11 +1,14 @@
 export interface IUserData {
     nom: string;
+    id: number;
    };
 
 export declare type RequestMethod = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
-export declare type RequestContentType = 'application/json';
+export declare type RequestContentType = 'application/json' | 'multipart/form-data';
 
 export interface RequestHeader {
+    Utilisateur_id: string;
+    'Accept'?: 'application/hal+json';
     'Authorization'?: string;
     'Content-Type': RequestContentType;
 }
@@ -145,18 +148,19 @@ export interface Image{
     titre: string;
 }
 
-export interface ListeBiliotheque{
-    biliotheques: Image[];
-}
-
 export interface ImagePost{
     image: Blob;
 }
 
 export interface ImagePostReponse{
-    image_url: string;
+    url: string;
 }
 
 export interface ListArticleOrderByAlphabet {
     [letter: string]: string[];
+}
+
+export interface ImagePostBiblioteque {
+    image_url: string;
+    titre: string;
 }

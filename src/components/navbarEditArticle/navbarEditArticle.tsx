@@ -201,8 +201,8 @@ export default function NavbarEditArticle(props: { textareaRef: React.RefObject<
                 actionOnMouseLeave={(subMenu: React.RefObject<HTMLUListElement>) => hideSubmenu(subMenu)}
                 actionOnClickSubmenu={(subMenu: React.RefObject<HTMLUListElement>) => hideSubmenu(subMenu)}
                 listSubmenu={[
-                    <ItemSubmenuEditArticle actionOnClick={() => addLine('![image](https://)', -1)} content={<FontAwesomeIcon icon={faImage}/>} tooltip='Insérer un lien vers une image' />,
-                    <ItemSubmenuEditArticle actionOnClick={() => setLibraryModalOpen(true)} content={<FontAwesomeIcon icon={faBookBookmark}/>} tooltip="Bibliothèque d'image" />,
+                    <ItemSubmenuEditArticle actionOnClick={() => addLine('![image](https://)', -1)} content={<FontAwesomeIcon icon={faImage}/>} tooltip='Insérer un lien vers une image' key={crypto.randomUUID()} />,
+                    <ItemSubmenuEditArticle actionOnClick={() => setLibraryModalOpen(true)} content={<FontAwesomeIcon icon={faBookBookmark}/>} tooltip="Bibliothèque d'image" key={crypto.randomUUID()} />
                 ]} />
                 <ItemMenuEditArticle tooltip='Insérer un lien (ctrl + l)' actionOnClick={link} icon={faLink} />
                 <SubmenuEditArticle
@@ -211,11 +211,11 @@ export default function NavbarEditArticle(props: { textareaRef: React.RefObject<
                 actionOnMouseLeave={(subMenu: React.RefObject<HTMLUListElement>) => hideSubmenu(subMenu)}
                 actionOnClickSubmenu={(subMenu: React.RefObject<HTMLUListElement>) => hideSubmenu(subMenu)}
                 listSubmenu={[
-                    <ItemSubmenuEditArticle actionOnClick={() => addLine(textArray(2,2), -1)} content='2x2' tooltip='Insérer un tableau 2x2' />,
-                    <ItemSubmenuEditArticle actionOnClick={() => addLine(textArray(3,2), -1)} content='3x2' tooltip='Insérer un tableau 3x2' />,
-                    <ItemSubmenuEditArticle actionOnClick={() => addLine(textArray(2,3), -1)} content='2x3' tooltip='Insérer un tableau 2x3' />,
-                    <ItemSubmenuEditArticle actionOnClick={() => addLine(textArray(3,3), -1)} content='3x3' tooltip='Insérer un tableau 3x3' />,
-                    <ItemSubmenuEditArticle actionOnClick={() => arrayXbyY()} content='?x?' tooltip='Insérer un tableau personnalisé' />,
+                    <ItemSubmenuEditArticle actionOnClick={() => addLine(textArray(2,2), -1)} content='2x2' tooltip='Insérer un tableau 2x2' key={crypto.randomUUID()} />,
+                    <ItemSubmenuEditArticle actionOnClick={() => addLine(textArray(3,2), -1)} content='3x2' tooltip='Insérer un tableau 3x2' key={crypto.randomUUID()} />,
+                    <ItemSubmenuEditArticle actionOnClick={() => addLine(textArray(2,3), -1)} content='2x3' tooltip='Insérer un tableau 2x3' key={crypto.randomUUID()} />,
+                    <ItemSubmenuEditArticle actionOnClick={() => addLine(textArray(3,3), -1)} content='3x3' tooltip='Insérer un tableau 3x3' key={crypto.randomUUID()} />,
+                    <ItemSubmenuEditArticle actionOnClick={() => arrayXbyY()} content='?x?' tooltip='Insérer un tableau personnalisé' key={crypto.randomUUID()} />,
                 ]} />
                 <ItemMenuEditArticle tooltip='Insérer un sommaire' actionOnClick={() => addLine('## Sommaire\n', 1)} icon={faRectangleList} />
                 <ItemMenuEditArticle tooltip='Insérer une section' actionOnClick={() => addLine('\n---\n', 1)} icon={faSection} />

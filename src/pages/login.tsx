@@ -33,11 +33,25 @@ function Login () {
                 password: password,
             };
             try {
-                const response = await RequestHelper<UtilisateurConnexion>('POST', route_api.login, formData);
+                // const response = await RequestHelper<UtilisateurConnexion>('POST', route_api.login, formData);
+                const response = await RequestHelper<any>('POST', route_api.login, formData);
                 if (response.status === 200) {
+                    // Création d'un faux jeton pour test. Le jeton doit être au format jwt
+                    const now = Math.floor(Date.now() / 1000);
+                    const oneDayFromNow = now + 60 * 60 * 24;
+                    const header = btoa(JSON.stringify({ alg: "HS256", typ: "JWT" }));
+                    const payload = btoa(JSON.stringify({ id: response.data.id, name: response.data.name, mail: response.data.mail, exp: oneDayFromNow }));
+                    const signature = 'fake-signature';
+                    const fakeToken = `${header}.${payload}.${signature}`;
                     if (signIn({
                         auth: {
-                            token: response.data.token
+                            /* faux jeton pour test. Le jeton doit être au format jwt */
+                            // token: response.data.token
+                            token: fakeToken
+                        },
+                        userState: {
+                            id: response.data.id,
+                            nom: response.data.name
                         }
                     }))
                     navigate('/some'); //TODO: modifier la redirection
