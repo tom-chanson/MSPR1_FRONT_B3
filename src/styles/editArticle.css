@@ -1,3 +1,5 @@
+@import url('color.css');
+
 .container-edit-preview-article{
     flex: 1;
     display: grid;
@@ -28,7 +30,7 @@
 
     .container-edit-article{
         grid-area: edit-article;
-        background: #EEEEEE;
+        background: var(--light-grey);
         flex: 1;
         display: flex;
         width: 100%;

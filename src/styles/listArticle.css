@@ -1,6 +1,9 @@
+@import url('color.css');
+
 .container-list-article{
     width: 100%;
     padding: 2rem 2rem;
+    background-color: var(--grey);
 
     .container-letter{
         padding-bottom: 0.5rem;
@@ -15,7 +18,7 @@
         bottom: 2rem;
         right: 2rem;
         background: #333;
-        color: #fff;
+        color: var(--white);
         border-radius: 5px;
         cursor: pointer;
         transition: all 0.3s ease;
@@ -49,7 +52,7 @@
             text-decoration: none;
             color: #333;
             border-radius: 5px;
-            background: #fff;
+            background: var(--white);
             box-shadow: 0 0 10px 0 rgba(0,0,0,0.1);
             transition: all 0.3s ease;
             cursor: pointer;
@@ -74,7 +77,7 @@
             }
 
             &:hover{
-                background: #f5f5f5;
+                background: var(--light-grey);
             }
         }
     }
@@ -103,7 +106,7 @@
             width: 100%;
             padding: 1rem;
             margin-bottom: 1rem;
-            background: #fff;
+            background: var(--white);
             box-shadow: 0 0 10px 0 rgba(0,0,0,0.1);
             border-radius: 5px;
             display: flex;
@@ -112,7 +115,7 @@
             cursor: pointer;
             transition: all 0.3s ease;
             text-decoration: none;
-            color: #333;
+            color: var(--black);
 
             &:hover{
                 transform: scale(1.05);
@@ -125,12 +128,8 @@
                 white-space: nowrap;
                 overflow: hidden;
                 text-overflow: ellipsis;
-                /* enlever le bold */
                 font-weight: 400;
-
-            }
-        
-    }
-        
+            }   
+        }
     }
 }

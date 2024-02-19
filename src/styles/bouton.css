@@ -1,0 +1,8 @@
+@import url('color.css');
+
+.custom-button {
+    padding: 10px 20px;
+    cursor: pointer;
+    border: none;
+    color: var(--white);
+}

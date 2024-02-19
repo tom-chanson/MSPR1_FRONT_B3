@@ -1,16 +1,18 @@
+@import url('color.css');
+
 .container-auth{
     position: relative;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #009579;
+    background: var(--primary-color);
 
 .container-login-register {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #f5f5f5;
+  background: var(--white);
   max-width: none;
   margin: 0 1rem;
   max-width: 430px;
@@ -34,7 +36,7 @@
      padding: 0 15px;
      font-size: 17px;
      margin-bottom: 1.3rem;
-     border: 1px solid #ddd;
+     border: 1px solid var(--light-grey);
      border-radius: 6px;
      outline: none;
      width: 100%;
@@ -47,15 +49,15 @@
 
    .auth-form a{
     font-size: 16px;
-    color: #009579;
+    color: var(--primary-color);
     text-decoration: none;
   }
   .auth-form a:hover{
     text-decoration: underline;
   }
   .btn-auth-form-submit{
-    color: #fff;
-    background: #009579;
+    color: var(--white);
+    background: var(--primary-color);;
     font-size: 1.2rem;
     font-weight: 500;
     letter-spacing: 1px;
@@ -65,14 +67,14 @@
   }
 
   .auth-form input.btn-auth-form:enabled:hover, .btn-auth-form-submit:enabled:hover{
-    background: #006653;
+    background: var(--secondary-color);
   }
   .signup{
     font-size: 17px;
     text-align: center;
   }
   .signup label{
-    color: #009579;
+    color: var(--primary-color);
     cursor: pointer;
   }
   .signup label:hover{
