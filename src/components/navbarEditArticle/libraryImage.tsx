@@ -27,6 +27,8 @@ export default function LibraryImage(props: {open: boolean, setOpen: (open: bool
     const refInputFile = useRef<HTMLInputElement>(null);
 
     useEffect(() => {
+        console.log('loading', loading);
+        console.log('authHeader', authHeader);
     if (loading && authHeader) {
         RequestHelperAuth<Image[]>('GET', route_api.library_image, authHeader).then((response) => {
             const tempImages: string[] = [];
@@ -43,7 +45,8 @@ export default function LibraryImage(props: {open: boolean, setOpen: (open: bool
             console.warn(error);
             setLoading(false);
         });
-    }});
+    }
+});
 
     const [fileInput, setFileInput] = useState<File | null>(null);
     const addImage = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -79,6 +82,7 @@ export default function LibraryImage(props: {open: boolean, setOpen: (open: bool
                             setImages([...images, response.data.url]);
                             setModalTitleOpen(false);
                             props.setOpen(false);
+                            props.addInNewLine('![](' + response.data.url + ')' , 3);
                         } else {
                             console.warn(response_image);
                         }

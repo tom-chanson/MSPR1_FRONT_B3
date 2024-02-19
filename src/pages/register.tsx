@@ -108,8 +108,9 @@ function Register () {
             setLoading(true);
             const formData = {
                 mail: email,
-                name: username,
-                password: password,
+                nom: username,
+                mdp: password,
+                botaniste: false
             };
             try {
                 // const response = await RequestHelper<UtilisateurConnexion>('POST', route_api.register, formData);
@@ -128,6 +129,10 @@ function Register () {
                         auth: {
                             /* faux jeton pour test. Le jeton doit être au format jwt */
                             token: fakeToken
+                        },
+                        userState: {
+                            id: response.data.id,
+                            nom: response.data.name
                         }
                     }))
                     navigate('/some'); //TODO: modifier la redirection
