@@ -60,4 +60,5 @@ export const route_api = {
     library_image : "/bibliotheque/me",
     post_image : "/image",
     post_image_biblioteque : "/bibliotheque/one",
+    annonce_attente : "/annonce_attente",
 }

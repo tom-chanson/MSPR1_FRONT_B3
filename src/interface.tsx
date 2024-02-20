@@ -1,7 +1,7 @@
 export interface IUserData {
     nom: string;
     id: number;
-   };
+   }
 
 export declare type RequestMethod = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
 export declare type RequestContentType = 'application/json' | 'multipart/form-data';
@@ -24,10 +24,28 @@ export interface UtilisateurInscription {
     adresse: Adresse;
 }
 
+export interface UtilisateurAnnonce {
+    mail: string;
+    nom: string;
+    image_url: string;
+    botaniste: boolean;
+    adresse: Adresse;
+}
+
 export interface Adresse {
-    latitude: number;
-    longitude: number;
+    latitude: string;
+    longitude: string;
     adresse: string;
+}
+
+export interface AnnonceAttente {
+    titre: string;
+    description: string;
+    date_creation: Date;
+    date_debut: Date;
+    date_fin: Date;
+    besoin_aide: boolean;
+    utilisateur: UtilisateurAnnonce;
 }
 
 export interface Annonce {

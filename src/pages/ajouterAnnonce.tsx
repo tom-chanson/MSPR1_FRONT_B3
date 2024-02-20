@@ -88,6 +88,7 @@ const AnnonceForm: React.FC = () => {
                     <div>
                         <label htmlFor="description">Description:</label>
                         <textarea
+
                             id="description"
                             value={description}
                             onChange={(e) => setDescription(e.target.value)}

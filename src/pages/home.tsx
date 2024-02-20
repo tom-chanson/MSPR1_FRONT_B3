@@ -1,10 +1,11 @@
 import "../styles/home.css";
 import "leaflet/dist/leaflet.css";
 import {MapContainer, TileLayer, Marker, Popup} from "react-leaflet"
-import {LatLngExpression} from "leaflet";
 import Button from "../components/bouton";
-import {useState} from "react";
-
+import {useEffect, useState} from "react";
+import { AnnonceAttente } from "../interface";
+import { route_api } from "../constants";
+import { RequestHelper } from '../helpers/request';
 
 import {Icon} from "leaflet";
 
@@ -14,6 +15,7 @@ export default function Home() {
     const zoom = 13;
     const [center, setCenter] = useState<[number, number]>(initialCenter);
     const [key, setKey] = useState<[number, number]>([0, 0]);
+    const [annonces, setAnnonces] = useState<AnnonceAttente[]>([]);
 
     const updateUserPosition = () => {
         navigator.geolocation.getCurrentPosition((position) => {
@@ -23,17 +25,23 @@ export default function Home() {
         });
     };
 
+    const FetchAnnonce = () => {
+        RequestHelper<AnnonceAttente[]>('GET', route_api.annonce_attente).then((response) => {
+            if (response.status === 200) {
+                setAnnonces(response.data);
+            } else {
+                console.error(response);
+            }
+        }).catch((error) => {
+            console.error(error);
+        });
+    }
 
-    const markers: [{ geocode: LatLngExpression, popUp: string }] = [
-        {
-            geocode: [48.86, 2.3522],
-            popUp: "Titre de l'annonce"
-        },
-    ];
+    useEffect(() => {
+        FetchAnnonce();
+    }, []);
 
     const customIcon = new Icon({
-        //
-        //iconUrl: require("../assets/placeholder.png"),
         iconUrl: "https://cdn-icons-png.flaticon.com/512/6376/6376504.png",
         iconSize: [38, 38] // size of the icon
     });
@@ -47,9 +55,13 @@ export default function Home() {
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
 
-            {markers.map(marker => (
-                <Marker position={marker.geocode} icon={customIcon} key={crypto.randomUUID()}>
-                    <Popup>{marker.popUp}</Popup>
+            {annonces.map((annonce) => (
+                <Marker
+                    position={[parseFloat(annonce.utilisateur.adresse.latitude), parseFloat(annonce.utilisateur.adresse.longitude)]}
+                    icon={customIcon}
+                    key={annonce.titre}
+                >
+                    <Popup>{annonce.titre}</Popup>
                 </Marker>
             ))}
         </MapContainer>
