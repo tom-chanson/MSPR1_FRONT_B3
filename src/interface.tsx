@@ -22,6 +22,7 @@ export interface UtilisateurInscription {
     mail: string;
     mdp: string;
     adresse: Adresse;
+    botaniste: false;
 }
 
 export interface Adresse {
@@ -164,3 +165,28 @@ export interface ImagePostBiblioteque {
     image_url: string;
     titre: string;
 }
+
+export interface AddresseApi {
+    type: string;
+    version: string;
+    features: Feature[];
+    attribution: string;
+    licence: string;
+    query: string;
+    limit: number;
+  }
+  
+export interface Feature {
+    type: string;
+    geometry: Geometry;
+    properties: Properties;
+  }
+  
+  interface Geometry {
+    type: string;
+    coordinates: number[];
+  }
+  
+  interface Properties {
+    label: string;
+  }

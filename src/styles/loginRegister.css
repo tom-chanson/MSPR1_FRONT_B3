@@ -21,7 +21,8 @@
   box-shadow: 0 5px 10px rgba(0,0,0,0.3);
 
   .auth-form{
-    padding: 2rem;
+    padding: 3rem;
+    width: 100%;
   }
 
   
@@ -31,7 +32,7 @@
     text-align: center;
     margin-bottom: 1.5rem;
   }
-  .auth-form input, .btn-auth-form-submit{
+  .btn-auth-form-submit{
     height: 40px;
      padding: 0 15px;
      font-size: 17px;
@@ -41,8 +42,17 @@
      outline: none;
      width: 100%;
    }
+
+   .input-w100{
+    width: 100%;
+   }
+
+   .input-container{
+    width: 100%;
+    margin-bottom: 1rem;
+   }
   
-   .auth-form input, .btn-auth-form-submit{
+   .btn-auth-form-submit{
      height: 60px;
      vertical-align: middle;
    }
@@ -69,6 +79,12 @@
   .auth-form input.btn-auth-form:enabled:hover, .btn-auth-form-submit:enabled:hover{
     background: var(--secondary-color);
   }
+
+  .btn-auth-form-submit:disabled{
+    background: var(--grey);
+    cursor: not-allowed;
+  }
+
   .signup{
     font-size: 17px;
     text-align: center;
@@ -80,5 +96,9 @@
   .signup label:hover{
     text-decoration: underline;
   }
+}
+
+.container-error span:not(:first-child){
+  display: none;
 }
 }

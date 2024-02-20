@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../styles/ajouterAnnonce.css';
-
-interface Plant {
-    id: number;
-    espece: string;
-}
+import { RequestHelperAuth } from '../helpers/request';
+import { Plante } from '../interface';
+import useAuthUser from 'react-auth-kit/hooks/useAuthUser';
+import { route_api } from '../constants';
 
 const AnnonceForm: React.FC = () => {
     const [title, setTitle] = useState<string>('');
@@ -13,24 +12,23 @@ const AnnonceForm: React.FC = () => {
     const [selectedPlant, setSelectedPlant] = useState<string>('');
     const [startDate, setStartDate] = useState<string>('');
     const [endDate, setEndDate] = useState<string>('');
-    const [plants, setPlants] = useState<Plant[]>([]);
+    const [plants, setPlants] = useState<Plante[]>([]);
+    const authUser: any = useAuthUser();
+    const authHeader = authUser.id;
 
     useEffect(() => {
         const fetchPlants = async () => {
             try {
-                const response = await axios.get('http://localhost:8080/mes_plantes', {
-                    headers: {
-                        Utilisateur_id: 1,
-                    },
+                RequestHelperAuth<Plante[]>('GET', route_api.get_plante, authHeader).then((response) => {
+                    setPlants(response.data);   
                 });
-                setPlants(response.data);
             } catch (error) {
                 console.error('Erreur lors de la récupération des plantes :', error);
             }
         };
 
         fetchPlants();
-    }, []);
+    }, [authHeader]);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
