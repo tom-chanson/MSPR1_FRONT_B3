@@ -7,10 +7,10 @@ import Button from "@mui/material/Button";
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import '../../styles/libraryImage.css';
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
-import useAuthHeader from 'react-auth-kit/hooks/useAuthHeader';
+// import useAuthHeader from 'react-auth-kit/hooks/useAuthHeader';
 import useAuthUser from "react-auth-kit/hooks/useAuthUser";
 import TextField from "@mui/material/TextField";
-import { ImagePost, ImagePostBiblioteque, ImagePostReponse, Image } from "../../interface";
+import { ImagePostBiblioteque, ImagePostReponse, Image } from "../../interface";
 import { route_api } from "../../constants";
 
 

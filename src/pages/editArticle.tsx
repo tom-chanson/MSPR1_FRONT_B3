@@ -5,7 +5,7 @@ import NavbarEditArticle from '../components/navbarEditArticle/navbarEditArticle
 import { Article } from '../interface';
 import { RequestHelperAuth } from '../helpers/request';
 import { useParams } from 'react-router-dom';
-import useAuthHeader from 'react-auth-kit/hooks/useAuthHeader';
+// import useAuthHeader from 'react-auth-kit/hooks/useAuthHeader';
 import useAuthUser from 'react-auth-kit/hooks/useAuthUser';
 import { templateArticle } from '../constants';
 import { route_api } from '../constants';
