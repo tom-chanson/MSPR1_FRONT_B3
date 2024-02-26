@@ -66,14 +66,14 @@ export default function InputAdress(props: {
         const adresse = responseData.find((adresse) => adresse.properties.label === value);
         if (adresse) {
           props.setAdresse({
-            latitude: adresse.geometry.coordinates[1],
-            longitude: adresse.geometry.coordinates[0],
+            latitude: adresse.geometry.coordinates[1].toString(),
+            longitude: adresse.geometry.coordinates[0].toString(),
             adresse: adresse.properties.label
           });
         } else {
             props.setAdresse({
-                latitude: 0,
-                longitude: 0,
+                latitude: "0",
+                longitude: "0",
                 adresse: ''
             });
             }
