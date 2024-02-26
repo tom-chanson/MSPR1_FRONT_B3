@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import useSignIn from 'react-auth-kit/hooks/useSignIn';
-import { IUserData, Adresse, UtilisateurInscription, UtilisateurConnexion } from '../interface';
+import { IUserData, Adresse, UtilisateurInscription } from '../interface';
 import { Link } from 'react-router-dom';
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { RiErrorWarningFill } from "react-icons/ri";
@@ -112,11 +112,26 @@ function Register () {
                 adresse: adresse
             };
             try {
-                const response = await RequestHelper<UtilisateurConnexion>('POST', route_api.register, formData);
+                // const response = await RequestHelper<UtilisateurConnexion>('POST', route_api.register, formData);
+                const response = await RequestHelper<any>('POST', route_api.register, formData);
+                const now = Math.floor(Date.now() / 1000);
+                const oneDayFromNow = now + 60 * 60 * 24;
+                const header = btoa(JSON.stringify({ alg: "HS256", typ: "JWT" }));
+                const payload = btoa(JSON.stringify({ id: response.data.id, name: response.data.name, mail: response.data.mail, exp: oneDayFromNow }));
+                const signature = 'fake-signature';
+                const fakeToken = `${header}.${payload}.${signature}`;
+
                 if (response.status === 200) {
+                    console.log(response.data)
                     if (signIn({
+                        
                         auth: {
-                            token: response.data.token
+                            //fake token
+                            token: fakeToken
+                        },
+                        userState: {
+                            id: response.data.id,
+                            nom: ''
                         }
                     }))
                     navigate('/'); //TODO: modifier la redirection

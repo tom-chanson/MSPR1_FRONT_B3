@@ -1,6 +1,7 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { API_URL } from '../constants';
 import { RequestMethod, RequestHeader } from '../interface';
+import useAuthUser from 'react-auth-kit/hooks/useAuthUser';
 
 
 export function RequestHelperAuth<T>(method: RequestMethod, route: string, auth: string, data?: any): Promise<AxiosResponse<T>> {
@@ -37,10 +38,21 @@ function RequestAuthHelper<T>(method: RequestMethod, route: string, auth: string
         headers: {
             ...headers,
         },
+
         data: data,
         baseURL: API_URL,
         timeout: 90000,
+        withCredentials: false,
     };
     console.log(config);
     return axios.request<T>(config);
+}
+
+export const useAuth = () => {
+    const authHeader: any = useAuthUser();
+    if (authHeader) {
+        const result: string = authHeader.id;
+        return result;
+    }
+    return null;
 }

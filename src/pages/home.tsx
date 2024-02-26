@@ -5,10 +5,9 @@ import Button from "../components/bouton";
 import {useEffect, useState} from "react";
 import { AnnonceAttente } from "../interface";
 import { route_api } from "../constants";
-import { RequestHelper, RequestHelperAuth } from '../helpers/request';
-
+import { RequestHelperAuth, useAuth } from '../helpers/request';
 import {Icon} from "leaflet";
-import useAuthHeader from "react-auth-kit/hooks/useAuthHeader";
+
 
 export default function Home() {
 
@@ -26,7 +25,7 @@ export default function Home() {
         });
     };
 
-    const authHeader = useAuthHeader();
+    const authHeader = useAuth();
 
     const FetchAnnonce = () => {
         if (!authHeader) {
@@ -45,6 +44,7 @@ export default function Home() {
 
     useEffect(() => {
         FetchAnnonce();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const customIcon = new Icon({

@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../styles/ajouterAnnonce.css';
-import { RequestHelperAuth } from '../helpers/request';
+import { RequestHelperAuth, useAuth } from '../helpers/request';
 import { Plante } from '../interface';
 import { route_api } from '../constants';
-import useAuthHeader from 'react-auth-kit/hooks/useAuthHeader';
 
 const AnnonceForm: React.FC = () => {
     const [title, setTitle] = useState<string>('');
@@ -13,7 +12,7 @@ const AnnonceForm: React.FC = () => {
     const [startDate, setStartDate] = useState<string>('');
     const [endDate, setEndDate] = useState<string>('');
     const [plants, setPlants] = useState<Plante[]>([]);
-    const authHeader = useAuthHeader();
+    const authHeader = useAuth();
 
     useEffect(() => {
         const fetchPlants = async () => {

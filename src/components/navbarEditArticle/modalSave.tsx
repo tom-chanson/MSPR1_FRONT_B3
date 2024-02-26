@@ -3,9 +3,8 @@ import Modal from "@mui/material/Modal";
 import TextField from "@mui/material/TextField";
 import { useCallback, useEffect, useState } from "react";
 import { buildText } from "../../utils/editArticle";
-import useAuthHeader from "react-auth-kit/hooks/useAuthHeader";
 import { ArticlePost } from "../../interface";
-import { RequestHelperAuth } from "../../helpers/request";
+import { RequestHelperAuth, useAuth } from "../../helpers/request";
 import { route_api } from "../../constants";
 
 export default function ModalSave(props: { 
@@ -66,7 +65,7 @@ export default function ModalSave(props: {
     }
 
 
-    const authHeader = useAuthHeader();
+    const authHeader = useAuth();
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         props.setSaveModalOpen(false);

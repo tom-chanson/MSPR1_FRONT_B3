@@ -2,12 +2,11 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Modal from "@mui/material/Modal";
 import { useEffect, useRef, useState } from "react";
-import { RequestHelperAuth, RequestHelperAuthImage } from "../../helpers/request";
+import { RequestHelperAuth, RequestHelperAuthImage, useAuth } from "../../helpers/request";
 import Button from "@mui/material/Button";
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import '../../styles/libraryImage.css';
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
-import useAuthHeader from 'react-auth-kit/hooks/useAuthHeader';
 import TextField from "@mui/material/TextField";
 import { ImagePostBiblioteque, ImagePostReponse, Image } from "../../interface";
 import { route_api } from "../../constants";
@@ -19,7 +18,7 @@ export default function LibraryImage(props: {open: boolean, setOpen: (open: bool
     const [images, setImages] = useState<string[]>([]);
     const [modalTitleOpen, setModalTitleOpen] = useState(false);
     const [loading, setLoading] = useState(true);
-    const authHeader = useAuthHeader();
+    const authHeader = useAuth();
 
     const refInputFile = useRef<HTMLInputElement>(null);
 
