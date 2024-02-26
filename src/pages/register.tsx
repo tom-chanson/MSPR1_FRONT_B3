@@ -16,8 +16,8 @@ import { TextField } from '@mui/material';
 function Register () {
     const [email, setEmail] = useState('');
     const [adresse, setAdresse] = useState<Adresse>({
-        latitude: 0,
-        longitude: 0,
+        latitude: "0",
+        longitude: "0",
         adresse: ''
     });
     const [errorEmail, setErrorEmail] = useState(
@@ -71,7 +71,7 @@ function Register () {
     }
 
     useEffect(() => {
-        if (!errorEmail.emailExist && errorEmail.emailValid && password.length > 0 && username.length > 0 && confirmPassword.length > 0 && password === confirmPassword && !loading && adresse.latitude !== 0 && adresse.longitude !== 0) {
+        if (!errorEmail.emailExist && errorEmail.emailValid && password.length > 0 && username.length > 0 && confirmPassword.length > 0 && password === confirmPassword && !loading && adresse.latitude !== "0" && adresse.longitude !== "0") {
             setDisabled(false);
         } else {
             setDisabled(true);
