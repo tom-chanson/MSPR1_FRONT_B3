@@ -35,11 +35,11 @@ function App() {
           <Route path="/register" element={<Register/>} id='register'/>
           <Route path="/article" element={<ListArticle />} id='list-article'/>
           <Route path="/article/:id" element={<ViewArticle />} id='article-id'/>
-          <Route path="/edit-article" element={<EditArticle/>} id='edit-article'/>
-          <Route path="/edit-article/:id" element={<EditArticle />} id='edit-article-id'/>
-          <Route path="/add-annonce" element={<AnnonceForm />} id="add-annonce"/>
-          <Route path="/add-plante" element={<PlantForm />} id='add-plante'/>
           <Route element={<AuthOutlet fallbackPath='/login' />}>
+            <Route path="/edit-article" element={<EditArticle/>} id='edit-article'/>
+            <Route path="/edit-article/:id" element={<EditArticle />} id='edit-article-id'/>
+            <Route path="/add-annonce" element={<AnnonceForm />} id="add-annonce"/>
+            <Route path="/add-plante" element={<PlantForm />} id='add-plante'/>
             <Route path="/some" element={<h1>Route qui nécessite d'être authentifié</h1>} id='some'/>
           </Route>
         </Routes>

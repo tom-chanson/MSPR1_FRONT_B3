@@ -5,9 +5,10 @@ import Button from "../components/bouton";
 import {useEffect, useState} from "react";
 import { AnnonceAttente } from "../interface";
 import { route_api } from "../constants";
-import { RequestHelper } from '../helpers/request';
+import { RequestHelper, RequestHelperAuth } from '../helpers/request';
 
 import {Icon} from "leaflet";
+import useAuthHeader from "react-auth-kit/hooks/useAuthHeader";
 
 export default function Home() {
 
@@ -25,8 +26,13 @@ export default function Home() {
         });
     };
 
+    const authHeader = useAuthHeader();
+
     const FetchAnnonce = () => {
-        RequestHelper<AnnonceAttente[]>('GET', route_api.annonce_attente).then((response) => {
+        if (!authHeader) {
+            return;
+        }
+        RequestHelperAuth<AnnonceAttente[]>('GET', route_api.annonce_attente, authHeader).then((response) => {
             if (response.status === 200) {
                 setAnnonces(response.data);
             } else {
