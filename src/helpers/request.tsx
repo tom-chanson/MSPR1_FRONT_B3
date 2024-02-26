@@ -1,6 +1,7 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { API_URL } from '../constants';
 import { RequestMethod, RequestHeader } from '../interface';
+
 import useAuthUser from 'react-auth-kit/hooks/useAuthUser';
 
 
@@ -24,6 +25,7 @@ function RequestAuthHelper<T>(method: RequestMethod, route: string, auth: string
     const accept = image ? 'application/hal+json' : '';
     const headers: RequestHeader = {
         'Content-Type': contentType,
+        Utilisateur_id: '',
     };
     if (accept) {
         headers.Accept = accept;
@@ -31,6 +33,7 @@ function RequestAuthHelper<T>(method: RequestMethod, route: string, auth: string
     if (auth) {
         console.log('auth', auth);
         headers.Authorization = auth;
+        headers.Utilisateur_id = auth;
     }
     const config: AxiosRequestConfig = {
         method: method,
@@ -38,11 +41,9 @@ function RequestAuthHelper<T>(method: RequestMethod, route: string, auth: string
         headers: {
             ...headers,
         },
-
         data: data,
         baseURL: API_URL,
         timeout: 90000,
-        withCredentials: false,
     };
     console.log(config);
     return axios.request<T>(config);
