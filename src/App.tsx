@@ -14,6 +14,8 @@ import Navbar from "./components/navbar/navbar";
 import EditArticle from './pages/editArticle';
 import ViewArticle from './pages/viewArticle';
 import ListArticle from './pages/listArticle';
+import AnnonceForm from "./pages/ajouterAnnonce";
+import PlantForm from "./pages/ajouterPlante";
 
 const store = createStore<IUserData>({
   authName:'_auth',
@@ -35,6 +37,8 @@ function App() {
           <Route path="/article/:id" element={<ViewArticle />} id='article-id'/>
           <Route path="/edit-article" element={<EditArticle/>} id='edit-article'/>
           <Route path="/edit-article/:id" element={<EditArticle />} id='edit-article-id'/>
+          <Route path="/add-annonce" element={<AnnonceForm />} id="add-annonce"/>
+          <Route path="/add-plante" element={<PlantForm />} id='add-plante'/>
           <Route element={<AuthOutlet fallbackPath='/login' />}>
             <Route path="/some" element={<h1>Route qui nécessite d'être authentifié</h1>} id='some'/>
           </Route>

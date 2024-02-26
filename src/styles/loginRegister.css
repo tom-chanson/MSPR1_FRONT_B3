@@ -1,16 +1,18 @@
+@import url('color.css');
+
 .container-auth{
     position: relative;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #009579;
+    background: var(--primary-color);
 
 .container-login-register {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #f5f5f5;
+  background: var(--white);
   max-width: none;
   margin: 0 1rem;
   max-width: 430px;
@@ -19,7 +21,8 @@
   box-shadow: 0 5px 10px rgba(0,0,0,0.3);
 
   .auth-form{
-    padding: 2rem;
+    padding: 3rem;
+    width: 100%;
   }
 
   
@@ -29,33 +32,42 @@
     text-align: center;
     margin-bottom: 1.5rem;
   }
-  .auth-form input, .btn-auth-form-submit{
+  .btn-auth-form-submit{
     height: 40px;
      padding: 0 15px;
      font-size: 17px;
      margin-bottom: 1.3rem;
-     border: 1px solid #ddd;
+     border: 1px solid var(--light-grey);
      border-radius: 6px;
      outline: none;
      width: 100%;
    }
+
+   .input-w100{
+    width: 100%;
+   }
+
+   .input-container{
+    width: 100%;
+    margin-bottom: 1rem;
+   }
   
-   .auth-form input, .btn-auth-form-submit{
+   .btn-auth-form-submit{
      height: 60px;
      vertical-align: middle;
    }
 
    .auth-form a{
     font-size: 16px;
-    color: #009579;
+    color: var(--primary-color);
     text-decoration: none;
   }
   .auth-form a:hover{
     text-decoration: underline;
   }
   .btn-auth-form-submit{
-    color: #fff;
-    background: #009579;
+    color: var(--white);
+    background: var(--primary-color);;
     font-size: 1.2rem;
     font-weight: 500;
     letter-spacing: 1px;
@@ -65,18 +77,28 @@
   }
 
   .auth-form input.btn-auth-form:enabled:hover, .btn-auth-form-submit:enabled:hover{
-    background: #006653;
+    background: var(--secondary-color);
   }
+
+  .btn-auth-form-submit:disabled{
+    background: var(--grey);
+    cursor: not-allowed;
+  }
+
   .signup{
     font-size: 17px;
     text-align: center;
   }
   .signup label{
-    color: #009579;
+    color: var(--primary-color);
     cursor: pointer;
   }
   .signup label:hover{
     text-decoration: underline;
   }
+}
+
+.container-error span:not(:first-child){
+  display: none;
 }
 }

@@ -1,3 +1,5 @@
+@import url('color.css');
+
 .navbar-edit-article {
     grid-area: navbar;
     display: flex;
@@ -5,7 +7,7 @@
     align-items: center;
     flex-direction: row;
     padding: 0 0.3rem;
-    background: #fff;
+    background: var(--white);
     border-bottom: 1px solid #ccc;
     z-index: 100;
     position: sticky;
@@ -26,7 +28,7 @@
 
 .separator{
     margin: 0 0 0.2rem 0.5rem;
-    border-left: 1px solid #ccc;
+    border-left: 1px solid var(--light-grey);
     height: 1.5rem;
     list-style: none;
 }
@@ -84,7 +86,7 @@
 }
 
 .navbar-item:hover {
-    background-color: #f4f4f4;
+    background-color: var(--light-grey);
 }
 
 .navbar-submenu {
@@ -94,8 +96,8 @@
     left: 0;
     width: 100vw;
     display: flex;
-    background: #fff;
-    border: 1px solid #ccc;
+    background: var(--white);
+    border: 1px solid var(--light-grey);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     padding: 1rem 0;
     flex-direction: column;
@@ -136,7 +138,7 @@
 }
 
 .navbar-submenu li:hover {
-    background-color: #f4f4f4;
+    background-color: var(--light-grey);
 }
 
 /* @media (hover: hover) and (pointer: fine) {
@@ -199,7 +201,7 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        background: #fff;
+        background: var(--white);
         padding: 1rem 2rem 2rem 2rem;
         border-radius: 0.3rem;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -228,7 +230,7 @@
             width: 100%;
             height: 2.5rem;
             padding: 0;
-            border: 1px solid #ccc;
+            border: 1px solid var(--light-grey);
             border-radius: 0.3rem;
             cursor: pointer;
             transition: background-color 0.3s;
@@ -241,9 +243,9 @@
                 cursor: pointer;
                 transition: color 0.3s;
                 font-weight: 700;
-                color: #f4f4f4;
+                color: var(--white);
                 /* arrière-plan vert clair */
-                background-color: #009579;
+                background-color: var(--primary-color);
                 display: block;
                 padding: 0.5rem 1rem;
                 width: 100%;

@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+@import url('color.css');
+
 *{
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
@@ -16,7 +18,7 @@ body{
   width: 100%;
   overflow-x: hidden;
   display: flex;
-  background: #f5f5f5;
+  background: var(--white);
 }
 
  input:focus, button[type="submit"]:focus{
@@ -53,7 +55,7 @@ button[type="submit"]:disabled{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    color: crimson;
+    color: var(--red);
 }
 
 .container-error span:last-child{

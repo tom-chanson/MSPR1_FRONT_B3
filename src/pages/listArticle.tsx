@@ -5,7 +5,7 @@ import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
 import { useEffect, useState } from "react";
 import Fab from '@mui/material/Fab';
-import { ListArticleOrderByAlphabet, ListeArticle } from "../interface";
+import { ListArticleOrderByAlphabet, Article } from "../interface";
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { route_api } from "../constants";
 import { RequestHelper } from '../helpers/request';
@@ -24,11 +24,11 @@ export default function ListArticle() {
 
     
     const fetchListArticle = () => {
-        RequestHelper<ListeArticle>('GET', route_api.list_articles).then((response) => {
+        RequestHelper<Article[]>('GET', route_api.list_articles).then((response) => {
             if (response.status === 200) {
                 console.log(response.data);
                 const listArticleTemp: string[] = [];
-                response.data.articles.forEach((article) => {
+                response.data.forEach((article) => {
                     listArticleTemp.push(article.titre);
                 });
                 setListArticle(listArticleTemp);
