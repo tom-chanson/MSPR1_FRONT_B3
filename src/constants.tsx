@@ -61,5 +61,5 @@ export const route_api = {
     post_image : "/image",
     post_image_biblioteque : "/bibliotheque/one",
     annonce_attente : "/annonce_attente",
-    get_plante : "/mes_plantes"
+    get_plante : "/mes_plantes",
 }
