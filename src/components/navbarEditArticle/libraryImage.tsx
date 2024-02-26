@@ -7,8 +7,7 @@ import Button from "@mui/material/Button";
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import '../../styles/libraryImage.css';
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
-// import useAuthHeader from 'react-auth-kit/hooks/useAuthHeader';
-import useAuthUser from "react-auth-kit/hooks/useAuthUser";
+import useAuthHeader from 'react-auth-kit/hooks/useAuthHeader';
 import TextField from "@mui/material/TextField";
 import { ImagePostBiblioteque, ImagePostReponse, Image } from "../../interface";
 import { route_api } from "../../constants";
@@ -20,15 +19,11 @@ export default function LibraryImage(props: {open: boolean, setOpen: (open: bool
     const [images, setImages] = useState<string[]>([]);
     const [modalTitleOpen, setModalTitleOpen] = useState(false);
     const [loading, setLoading] = useState(true);
-    // const authHeader = useAuthHeader();
-    const authUser: any = useAuthUser();
-    const authHeader = authUser.id;
+    const authHeader = useAuthHeader();
 
     const refInputFile = useRef<HTMLInputElement>(null);
 
     useEffect(() => {
-        console.log('loading', loading);
-        console.log('authHeader', authHeader);
     if (loading && authHeader) {
         RequestHelperAuth<Image[]>('GET', route_api.library_image, authHeader).then((response) => {
             const tempImages: string[] = [];

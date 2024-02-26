@@ -5,8 +5,7 @@ import NavbarEditArticle from '../components/navbarEditArticle/navbarEditArticle
 import { Article } from '../interface';
 import { RequestHelperAuth } from '../helpers/request';
 import { useParams } from 'react-router-dom';
-// import useAuthHeader from 'react-auth-kit/hooks/useAuthHeader';
-import useAuthUser from 'react-auth-kit/hooks/useAuthUser';
+import useAuthHeader from 'react-auth-kit/hooks/useAuthHeader';
 import { templateArticle } from '../constants';
 import { route_api } from '../constants';
 
@@ -16,11 +15,7 @@ export default function EditArticle() {
     const [loading, setLoading] = useState(true);
     const params = useParams();
     const [markdownText, setMarkdownText] = useState('');
-    // const authHeader = useAuthHeader();
-    const authUser: any = useAuthUser();
-    const authHeader = authUser.id;
-
-
+    const authHeader = useAuthHeader();
 
     useEffect(() => {
     if (params.id && loading && authHeader) {

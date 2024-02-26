@@ -3,8 +3,8 @@ import axios from 'axios';
 import '../styles/ajouterAnnonce.css';
 import { RequestHelperAuth } from '../helpers/request';
 import { Plante } from '../interface';
-import useAuthUser from 'react-auth-kit/hooks/useAuthUser';
 import { route_api } from '../constants';
+import useAuthHeader from 'react-auth-kit/hooks/useAuthHeader';
 
 const AnnonceForm: React.FC = () => {
     const [title, setTitle] = useState<string>('');
@@ -13,12 +13,14 @@ const AnnonceForm: React.FC = () => {
     const [startDate, setStartDate] = useState<string>('');
     const [endDate, setEndDate] = useState<string>('');
     const [plants, setPlants] = useState<Plante[]>([]);
-    const authUser: any = useAuthUser();
-    const authHeader = authUser.id;
+    const authHeader = useAuthHeader();
 
     useEffect(() => {
         const fetchPlants = async () => {
             try {
+                if (!authHeader) {
+                    return;
+                }
                 RequestHelperAuth<Plante[]>('GET', route_api.get_plante, authHeader).then((response) => {
                     setPlants(response.data);   
                 });

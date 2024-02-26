@@ -23,7 +23,6 @@ function RequestAuthHelper<T>(method: RequestMethod, route: string, auth: string
     const accept = image ? 'application/hal+json' : '';
     const headers: RequestHeader = {
         'Content-Type': contentType,
-        Utilisateur_id: '',
     };
     if (accept) {
         headers.Accept = accept;
@@ -31,7 +30,6 @@ function RequestAuthHelper<T>(method: RequestMethod, route: string, auth: string
     if (auth) {
         console.log('auth', auth);
         headers.Authorization = auth;
-        headers.Utilisateur_id = auth;
     }
     const config: AxiosRequestConfig = {
         method: method,

@@ -6,14 +6,12 @@ export default function ItemMenuEditArticle(props: { tooltip?: string, actionOnC
 
     return (
         <li className='navbar-item'>
-            {/* si tooltip */}
             {props.tooltip && 
             <Tooltip title={props.tooltip} arrow>
                 <div onClick={props.actionOnClick}>
                     <FontAwesomeIcon icon={props.icon} />
                 </div>
             </Tooltip>}
-            {/* sinon */}
             {!props.tooltip && 
             <div onClick={props.actionOnClick}>
                 <FontAwesomeIcon icon={props.icon} />
