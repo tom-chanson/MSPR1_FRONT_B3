@@ -7,6 +7,7 @@ import { RequestHelperAuth, useAuth } from '../helpers/request';
 import { useParams } from 'react-router-dom';
 import { templateArticle } from '../constants';
 import { route_api } from '../constants';
+import { useSnackbar } from 'notistack';
 
 export default function EditArticle() {
     const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -15,6 +16,7 @@ export default function EditArticle() {
     const params = useParams();
     const [markdownText, setMarkdownText] = useState('');
     const authHeader = useAuth();
+    const { enqueueSnackbar } = useSnackbar();
 
     useEffect(() => {
     if (params.id && loading && authHeader) {
@@ -22,13 +24,16 @@ export default function EditArticle() {
             if (response.status === 200) {
                 setLoading(false);
                 setMarkdownText(response.data.contenu);
+                enqueueSnackbar('Article chargé avec succès', { variant: 'success' });
             } else {
                 console.error(response);
                 setLoading(false);
+                enqueueSnackbar('Erreur lors du chargement de l\'article', { variant: 'error' });
             }
         } ).catch((error) => {
             console.error(error);
             setLoading(false);
+            enqueueSnackbar('Erreur lors du chargement de l\'article', { variant: 'error' });
         });
     } else {
         setLoading(false);
