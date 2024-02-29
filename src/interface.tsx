@@ -9,7 +9,6 @@ export declare type RequestContentType =
   | "multipart/form-data";
 
 export interface RequestHeader {
-  Utilisateur_id?: string;
   Accept?: "application/hal+json";
   Authorization?: string;
   "Content-Type": RequestContentType;
@@ -178,7 +177,7 @@ export interface ImagePostReponse {
 }
 
 export interface ListArticleOrderByAlphabet {
-  [letter: string]: {name: string, id: number}[];
+  [letter: string]: { name: string; id: number }[];
 }
 
 export interface ImagePostBiblioteque {

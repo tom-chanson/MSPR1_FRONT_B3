@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import useSignIn from "react-auth-kit/hooks/useSignIn";
-import { IUserData } from "../interface";
+import { IUserData, UtilisateurConnexion } from "../interface";
 import { Link, useNavigate } from "react-router-dom";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { RequestHelper } from "../helpers/request";
@@ -34,34 +34,16 @@ function Login() {
         mdp: password,
       };
       try {
-        // const response = await RequestHelper<UtilisateurConnexion>('POST', route_api.login, formData);
-        const response = await RequestHelper<any>(
+        const response = await RequestHelper<UtilisateurConnexion>(
           "POST",
           route_api.login,
           formData
         );
-        const now = Math.floor(Date.now() / 1000);
-        const oneDayFromNow = now + 60 * 60 * 24;
-        const header = btoa(JSON.stringify({ alg: "HS256", typ: "JWT" }));
-        const payload = btoa(
-          JSON.stringify({
-            id: response.data.id,
-            name: response.data.name,
-            mail: response.data.mail,
-            exp: oneDayFromNow,
-          })
-        );
-        const signature = "fake-signature";
-        const fakeToken = `${header}.${payload}.${signature}`;
         if (response.status === 200) {
           if (
             signIn({
               auth: {
-                token: fakeToken,
-              },
-              userState: {
-                id: response.data.id,
-                nom: "",
+                token: response.data.token,
               },
             })
           )
