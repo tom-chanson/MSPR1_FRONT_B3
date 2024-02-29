@@ -1,6 +1,6 @@
 import "../styles/listArticle.css";
 import { Tooltip } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
 import { useEffect, useState } from "react";
@@ -10,8 +10,10 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { route_api } from "../constants";
 import { RequestHelper } from "../helpers/request";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import Button from "../components/bouton";
 
 export default function ListArticle() {
+  const navigate = useNavigate();
   const [listArticleOrderByAlphabet, setListArticleOrderByAlphabet] =
     useState<ListArticleOrderByAlphabet>({});
   const [search, setSearch] = useState<string>("");
@@ -189,6 +191,12 @@ export default function ListArticle() {
           </p>
         </div>
       </ThemeProvider>
+      <Button
+        label="Créer un article"
+        color="#456654"
+        textSize="20px"
+        onClick={() => navigate("/edit-article")}
+      />
       {alphabet.map((letter) => {
         if (listArticleOrderByAlphabet[letter]) {
           return (

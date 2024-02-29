@@ -5,6 +5,7 @@ import { RequestHelperAuth, useAuth } from "../helpers/request";
 import { Plante } from "../interface";
 import { route_api } from "../constants";
 import { useSnackbar } from "notistack";
+import { format } from "date-fns";
 
 const AnnonceForm: React.FC = () => {
   const [title, setTitle] = useState<string>("");
@@ -42,12 +43,6 @@ const AnnonceForm: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Titre:", title);
-    console.log("Description:", description);
-    console.log("Plante sélectionnée:", selectedPlant);
-    console.log("Date de début:", startDate);
-    console.log("Date de fin:", endDate);
-
     const plantId = plants.find((plant) => plant.espece === selectedPlant)?.id;
 
     if (!plantId) {
@@ -60,16 +55,16 @@ const AnnonceForm: React.FC = () => {
 
     const formData = {
       titre: title,
-      description,
+      description: description,
       etat: "en_attente",
-      date_debut: startDate,
-      date_fin: endDate,
+      date_debut: format(new Date(startDate), "yyyy-MM-dd'T'HH:mm:ss.SSS"),
+      date_fin: format(new Date(endDate), "yyyy-MM-dd'T'HH:mm:ss.SSS"),
       besoin_aide: false,
-      utilisateur: {
-        id: 1,
-      },
       plante: {
-        id: plantId,
+        id: plants.find((plant) => plant.espece === selectedPlant)?.id,
+      },
+      utilisateur: {
+        id: authHeader,
       },
     };
 

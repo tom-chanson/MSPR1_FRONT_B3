@@ -18,6 +18,7 @@ import AnnonceForm from "./pages/ajouterAnnonce";
 import PlantForm from "./pages/ajouterPlante";
 import { SnackbarProvider, closeSnackbar } from "notistack";
 import { MdClose } from "react-icons/md";
+import { Profil } from "./pages/profil";
 
 const store = createStore<IUserData>({
   authName: "_auth",
@@ -84,6 +85,7 @@ function App() {
                 element={<h1>Route qui nécessite d'être authentifié</h1>}
                 id="some"
               />
+              <Route path="/profil" element={<Profil />} id="profil" />
             </Route>
           </Routes>
         </SnackbarProvider>
