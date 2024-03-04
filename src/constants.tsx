@@ -1,4 +1,4 @@
-export const API_URL = 'http://localhost:8080';
+export const API_URL = "http://localhost:8080";
 
 export const templateArticle = `# [Nom de la plante]
 
@@ -49,16 +49,18 @@ export const templateArticle = `# [Nom de la plante]
 ---
 
 *N'oubliez pas que chaque plante est unique et peut nécessiter des soins spécifiques. Consultez toujours des sources fiables et expérimentées pour obtenir des conseils personnalisés sur le soin de votre [Type de Plante].*
-`
+`;
 
 export const route_api = {
-    login : "/login",
-    register : "/register",
-    list_articles : "/article/all",
-    article : "/article/",
-    create_article : "/article/one",
-    library_image : "/bibliotheque/me",
-    post_image : "/image",
-    post_image_biblioteque : "/bibliotheque/one",
-    get_plante : "/mes_plantes",
-}
+  login: "/login",
+  register: "/register",
+  list_articles: "/article/all",
+  article: "/article_by_id/",
+  create_article: "/article/one",
+  library_image: "/bibliotheque/me",
+  post_image: "/image",
+  post_image_biblioteque: "/bibliotheque/one",
+  annonce_attente: "/annonce_attente",
+  get_plante: "/mes_plantes",
+  post_annonce: "/annonce/one",
+};

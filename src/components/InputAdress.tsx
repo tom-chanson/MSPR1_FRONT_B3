@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import axios from 'axios';
@@ -30,16 +30,20 @@ export default function InputAdress(props: {
     }
 
     setLoading(true);
-    if (inputValue.length < 3) {
+    if (inputValue.length < 4) {
         return undefined;
         }
 
     (async () => {
-      const response = await axios.get<AddresseApi>(`https://api-adresse.data.gouv.fr/search/?q=${inputValue}&limit=5&type=housenumber`);
+      try {
+        const response = await axios.get<AddresseApi>(`https://api-adresse.data.gouv.fr/search/?q=${inputValue}&limit=5&type=housenumber`);
 
-      if (active) {
-        setOptions(response.data.features.map((feature: Feature) => feature.properties.label));
-        setResponseData(response.data.features);
+        if (active) {
+          setOptions(response.data.features.map((feature: Feature) => feature.properties.label));
+          setResponseData(response.data.features);
+        }
+      } catch (error) {
+          console.error(error);
       }
     })();
 
@@ -66,14 +70,14 @@ export default function InputAdress(props: {
         const adresse = responseData.find((adresse) => adresse.properties.label === value);
         if (adresse) {
           props.setAdresse({
-            latitude: adresse.geometry.coordinates[1],
-            longitude: adresse.geometry.coordinates[0],
+            latitude: adresse.geometry.coordinates[1].toString(),
+            longitude: adresse.geometry.coordinates[0].toString(),
             adresse: adresse.properties.label
           });
         } else {
             props.setAdresse({
-                latitude: 0,
-                longitude: 0,
+                latitude: "0",
+                longitude: "0",
                 adresse: ''
             });
             }
