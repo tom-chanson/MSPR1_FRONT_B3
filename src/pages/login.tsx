@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import useSignIn from "react-auth-kit/hooks/useSignIn";
-import { IUserData } from "../interface";
+import { IUserData, UtilisateurConnexion } from "../interface";
 import { Link, useNavigate } from "react-router-dom";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { RequestHelper } from "../helpers/request";
@@ -34,8 +34,7 @@ function Login() {
         mdp: password,
       };
       try {
-        // const response = await RequestHelper<UtilisateurConnexion>('POST', route_api.login, formData);
-        const response = await RequestHelper<any>(
+        const response = await RequestHelper<UtilisateurConnexion>(
           "POST",
           route_api.login,
           formData
