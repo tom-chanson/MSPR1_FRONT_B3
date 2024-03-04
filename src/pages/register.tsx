@@ -159,7 +159,7 @@ function Register() {
               },
             })
           )
-            navigate("/"); //TODO: modifier la redirection
+            navigate("/");
         } else {
           console.error(response);
           enqueueSnackbar("Erreur lors de l'inscription", { variant: "error" });

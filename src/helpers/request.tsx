@@ -49,7 +49,6 @@ function RequestAuthHelper<T>(
     headers.Accept = accept;
   }
   if (auth) {
-    console.log("auth", auth);
     headers.Authorization = auth;
   }
   const config: AxiosRequestConfig = {
