@@ -17,7 +17,7 @@ jobs:
 
       - name: Build
         run: |
-          npm install
+          npm Build
 
       - name: Deploy site
         uses: JamesIves/github-pages-deploy-action@v4
