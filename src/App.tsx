@@ -1,5 +1,5 @@
 import "./styles/App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Redirect } from "react-router-dom";
 
 import createStore from "react-auth-kit/createStore";
 import AuthProvider from "react-auth-kit";
@@ -28,6 +28,7 @@ const store = createStore<IUserData>({
 });
 
 function App() {
+  console.log(window.location.pathname);
   return (
     <AuthProvider store={store}>
       <BrowserRouter basename="/MSPR1_FRONT_B3">
@@ -87,6 +88,7 @@ function App() {
               />
               <Route path="/profil" element={<Profil />} id="profil" />
             </Route>
+            <Redirect from="*" to="/" />
           </Routes>
         </SnackbarProvider>
       </BrowserRouter>
