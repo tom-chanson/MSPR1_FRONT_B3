@@ -30,7 +30,7 @@ const store = createStore<IUserData>({
 function App() {
   return (
     <AuthProvider store={store}>
-      <BrowserRouter>
+      <BrowserRouter basename="/MSPR1_FRONT_B3">
         <Navbar />
         <SnackbarProvider
           preventDuplicate
