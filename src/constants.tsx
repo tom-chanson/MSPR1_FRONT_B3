@@ -63,4 +63,9 @@ export const route_api = {
   annonce_attente: "/annonce_attente",
   get_plante: "/mes_plantes",
   post_annonce: "/annonce/one",
+  put_mail: "/utilisateur/mail",
+  put_password: "/utilisateur/password",
+  user: "/utilisateur/me",
 };
+
+export const emailRegex = /^((?!\.)[\w\-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/;

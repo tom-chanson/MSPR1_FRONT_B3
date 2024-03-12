@@ -1,15 +1,16 @@
-import { useState, useEffect } from 'react';
-import TextField from '@mui/material/TextField';
-import Autocomplete from '@mui/material/Autocomplete';
-import axios from 'axios';
-import { Feature, Adresse, AddresseApi } from '../interface';
-
-
+import { useState, useEffect } from "react";
+import TextField from "@mui/material/TextField";
+import Autocomplete from "@mui/material/Autocomplete";
+import axios from "axios";
+import { Feature, Adresse, AddresseApi } from "../interface";
 
 export default function InputAdress(props: {
-    setAdresse: (adresse: Adresse) => void;
-}){
-  const [inputValue, setInputValue] = useState<string>('');
+  setAdresse: (adresse: Adresse) => void;
+  disabled?: boolean;
+  adresse?: Adresse;
+}) {
+  const addressString = props.adresse ? props.adresse.adresse : "";
+  const [inputValue, setInputValue] = useState<string>(addressString);
   const [options, setOptions] = useState<string[]>([]);
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -24,26 +25,32 @@ export default function InputAdress(props: {
   useEffect(() => {
     let active = true;
 
-    if (inputValue === '') {
+    if (inputValue === "") {
       setOptions([]);
       return undefined;
     }
 
     setLoading(true);
     if (inputValue.length < 4) {
-        return undefined;
-        }
+      return undefined;
+    }
 
     (async () => {
       try {
-        const response = await axios.get<AddresseApi>(`https://api-adresse.data.gouv.fr/search/?q=${inputValue}&limit=5&type=housenumber`);
+        const response = await axios.get<AddresseApi>(
+          `https://api-adresse.data.gouv.fr/search/?q=${inputValue}&limit=5&type=housenumber`
+        );
 
         if (active) {
-          setOptions(response.data.features.map((feature: Feature) => feature.properties.label));
+          setOptions(
+            response.data.features.map(
+              (feature: Feature) => feature.properties.label
+            )
+          );
           setResponseData(response.data.features);
         }
       } catch (error) {
-          console.error(error);
+        console.error(error);
       }
     })();
 
@@ -56,10 +63,15 @@ export default function InputAdress(props: {
 
   return (
     <Autocomplete
-    noOptionsText='Aucune adresse trouvée'
-    loadingText='Recherche en cours...'
-        id="adresse"
+      noOptionsText="Aucune adresse trouvée"
+      loadingText="Recherche en cours..."
+      id="adresse"
       open={open}
+      value={props.adresse ? props.adresse.adresse : ""}
+      disabled={props.disabled}
+      isOptionEqualToValue={(option, value) => {
+        return option === value || value === "";
+      }}
       onOpen={() => {
         setOpen(true);
       }}
@@ -67,24 +79,34 @@ export default function InputAdress(props: {
         setOpen(false);
       }}
       onChange={(event, value) => {
-        const adresse = responseData.find((adresse) => adresse.properties.label === value);
+        if (value === null || value === "") {
+          props.setAdresse({
+            latitude: "0",
+            longitude: "0",
+            adresse: "",
+          });
+          return;
+        }
+        const adresse = responseData.find(
+          (adresse) => adresse.properties.label === value
+        );
         if (adresse) {
           props.setAdresse({
             latitude: adresse.geometry.coordinates[1].toString(),
             longitude: adresse.geometry.coordinates[0].toString(),
-            adresse: adresse.properties.label
+            adresse: adresse.properties.label,
           });
         } else {
-            props.setAdresse({
-                latitude: "0",
-                longitude: "0",
-                adresse: ''
-            });
-            }
+          props.setAdresse({
+            latitude: "0",
+            longitude: "0",
+            adresse: "",
+          });
+        }
       }}
       options={options}
       loading={loading}
-        clearOnEscape
+      clearOnEscape
       onInputChange={(event, newInputValue) => {
         setInputValue(newInputValue);
       }}
@@ -92,11 +114,11 @@ export default function InputAdress(props: {
         <TextField
           {...params}
           label="Adresse"
-          className='test'
+          className="test"
           required
+          disabled={props.disabled}
         />
       )}
     />
   );
-};
-
+}

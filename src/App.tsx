@@ -19,6 +19,7 @@ import PlantForm from "./pages/ajouterPlante";
 import { SnackbarProvider, closeSnackbar } from "notistack";
 import { MdClose } from "react-icons/md";
 import { Profil } from "./pages/profil";
+import UserProfile from "./pages/profilUser";
 
 const store = createStore<IUserData>({
   authName: "_auth",
@@ -81,9 +82,9 @@ function App() {
                 id="add-plante"
               />
               <Route
-                path="/some"
-                element={<h1>Route qui nécessite d'être authentifié</h1>}
-                id="some"
+                path="/user-profil"
+                element={<UserProfile />}
+                id="user-profil"
               />
               <Route path="/profil" element={<Profil />} id="profil" />
             </Route>

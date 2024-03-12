@@ -7,10 +7,11 @@ import { AnnonceAttente } from "../interface";
 import { route_api } from "../constants";
 import { RequestHelperAuth, useAuth } from "../helpers/request";
 import { Icon } from "leaflet";
+import MarkerClusterGroup from "react-leaflet-cluster";
 
 export default function Home() {
   const initialCenter: [number, number] = [47.209499162, -1.5499978];
-  const zoom = 13;
+  const [zoom, setZoom] = useState(6);
   const [center, setCenter] = useState<[number, number]>(initialCenter);
   const [key, setKey] = useState<[number, number]>([0, 0]);
   const [annonces, setAnnonces] = useState<AnnonceAttente[]>([]);
@@ -22,6 +23,7 @@ export default function Home() {
         position.coords.longitude,
       ];
       setCenter(userPosition);
+      setZoom(13);
       setKey((prevKey: [number, number]) => [prevKey[0] + 1, prevKey[1] + 1]);
     });
   };
@@ -67,24 +69,23 @@ export default function Home() {
           zoom={zoom}
           className="map-container"
           key={key[0]}
+          minZoom={3}
         >
-          <TileLayer
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          />
-
-          {annonces.map((annonce) => (
-            <Marker
-              position={[
-                parseFloat(annonce.utilisateur.adresse.latitude),
-                parseFloat(annonce.utilisateur.adresse.longitude),
-              ]}
-              icon={customIcon}
-              key={annonce.titre}
-            >
-              <Popup>{annonce.titre}</Popup>
-            </Marker>
-          ))}
+          <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+          <MarkerClusterGroup chunkedLoading>
+            {annonces.map((annonce) => (
+              <Marker
+                position={[
+                  parseFloat(annonce.utilisateur.adresse.latitude),
+                  parseFloat(annonce.utilisateur.adresse.longitude),
+                ]}
+                icon={customIcon}
+                key={annonce.titre}
+              >
+                <Popup>{annonce.titre}</Popup>
+              </Marker>
+            ))}
+          </MarkerClusterGroup>
         </MapContainer>
       </div>
       <div className="containerButton">
