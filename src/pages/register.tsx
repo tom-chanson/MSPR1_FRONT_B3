@@ -5,6 +5,7 @@ import {
   Adresse,
   UtilisateurInscription,
   UtilisateurConnexion,
+  PasswordError,
 } from "../interface";
 import { Link } from "react-router-dom";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
@@ -12,10 +13,11 @@ import { RiErrorWarningFill } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
 import { RequestHelper } from "../helpers/request";
 import "../styles/loginRegister.css";
-import { route_api } from "../constants";
+import { emailRegex, route_api } from "../constants";
 import InputAdress from "../components/InputAdress";
 import { TextField } from "@mui/material";
 import { useSnackbar } from "notistack";
+import InputCreationPassword from "../components/inputCreationPassword";
 
 function Register() {
   const [email, setEmail] = useState("");
@@ -30,9 +32,9 @@ function Register() {
     emailExist: false,
   });
   const [password, setPassword] = useState("");
-  const [username, setUsername] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [errorPassword, setErrorPassword] = useState({
+  const [username, setUsername] = useState("");
+  const [errorPassword, setErrorPassword] = useState<PasswordError>({
     length: false,
     uppercase: false,
     lowercase: false,
@@ -60,24 +62,6 @@ function Register() {
     setUsername(e.target.value);
   };
 
-  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value);
-    setErrorPassword({
-      ...errorPassword,
-      showError: true,
-    });
-  };
-
-  const handleConfirmPasswordChange = (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setConfirmPassword(e.target.value);
-    setErrorPassword({
-      ...errorPassword,
-      showConfirmError: true,
-    });
-  };
-
   useEffect(() => {
     if (
       !errorEmail.emailExist &&
@@ -91,8 +75,10 @@ function Register() {
       adresse.longitude !== "0"
     ) {
       setDisabled(false);
+      console.log("disabled false");
     } else {
       setDisabled(true);
+      console.log("disabled true");
     }
   }, [
     email,
@@ -105,25 +91,9 @@ function Register() {
     adresse.longitude,
   ]);
 
-  useEffect(() => {
-    setErrorPassword({
-      ...errorPassword,
-      length: password.length >= 8,
-      uppercase: /[A-Z]/.test(password),
-      lowercase: /[a-z]/.test(password),
-      number: /[0-9]/.test(password),
-      special: /[ `!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?~]/.test(password),
-      confirmPassword: password === confirmPassword,
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [password, confirmPassword]);
-
   const { enqueueSnackbar } = useSnackbar();
 
   useEffect(() => {
-    // Check if email is valid (first part: before @, second part: after @) => first part can contain letters, numbers and + (one or zero, not more), contains letters again, second part can contain letters, numbers, . and 2 to 4 letters
-    const emailRegex =
-      /^[a-zA-Z0-9]+[+]?[a-zA-Z0-9]@[a-zA-Z0-9]+\.[a-zA-Z]{2,4}$/;
     setErrorEmail({
       ...errorEmail,
       emailValid: emailRegex.test(email),
@@ -217,83 +187,12 @@ function Register() {
             <div className="input-container">
               <InputAdress setAdresse={setAdresse} />
             </div>
-            <div className="input-container">
-              <TextField
-                type="password"
-                label="Mot de passe"
-                value={password}
-                onInput={handlePasswordChange}
-                autoComplete="current-password"
-                className="input-w100"
-                required
-              />
-            </div>
-            {errorPassword.showError ? (
-              <div className="container-error">
-                {!errorPassword.length ? (
-                  <span className="error">
-                    <RiErrorWarningFill /> Le mot de passe doit contenir au
-                    moins 8 caractères
-                  </span>
-                ) : null}
-                {!errorPassword.uppercase ? (
-                  <span className="error">
-                    <RiErrorWarningFill /> Le mot de passe doit contenir au
-                    moins une majuscule
-                  </span>
-                ) : null}
-                {!errorPassword.lowercase ? (
-                  <span className="error">
-                    <RiErrorWarningFill /> Le mot de passe doit contenir au
-                    moins une minuscule
-                  </span>
-                ) : null}
-                {!errorPassword.number ? (
-                  <span className="error">
-                    <RiErrorWarningFill /> Le mot de passe doit contenir au
-                    moins un chiffre
-                  </span>
-                ) : null}
-                {!errorPassword.special ? (
-                  <span className="error">
-                    <RiErrorWarningFill /> Le mot de passe doit contenir au
-                    moins un caractère spécial
-                  </span>
-                ) : null}
-              </div>
-            ) : null}
-
-            {errorPassword.length &&
-            errorPassword.uppercase &&
-            errorPassword.lowercase &&
-            errorPassword.number &&
-            errorPassword.special ? (
-              <TextField
-                type="password"
-                label="Confirmer le mot de passe"
-                value={confirmPassword}
-                onInput={handleConfirmPasswordChange}
-                autoComplete="current-password"
-                className="input-w100"
-                required
-              />
-            ) : null}
-
-            {errorPassword.showConfirmError &&
-            errorPassword.length &&
-            errorPassword.uppercase &&
-            errorPassword.lowercase &&
-            errorPassword.number &&
-            errorPassword.special ? (
-              <div className="container-error">
-                {!errorPassword.confirmPassword ? (
-                  <span className="error">
-                    <RiErrorWarningFill /> Les mots de passe ne correspondent
-                    pas
-                  </span>
-                ) : null}
-              </div>
-            ) : null}
+            <InputCreationPassword
+              setPassword={setPassword}
+              setConfirmPassword={setConfirmPassword}
+              setErrorPassword={setErrorPassword}
+              errorPassword={errorPassword}
+            />
             <button
               type="submit"
               className="btn-auth-form btn-auth-form-submit"

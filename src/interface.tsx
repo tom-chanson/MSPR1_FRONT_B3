@@ -18,6 +18,17 @@ export interface UtilisateurConnexion {
   token: string;
 }
 
+export interface PasswordError {
+  length: boolean;
+  uppercase: boolean;
+  lowercase: boolean;
+  number: boolean;
+  special: boolean;
+  confirmPassword: boolean;
+  showError: boolean;
+  showConfirmError: boolean;
+}
+
 export interface UtilisateurInscription {
   nom: string;
   mail: string;
@@ -26,7 +37,7 @@ export interface UtilisateurInscription {
   botaniste: false;
 }
 
-export interface UtilisateurAnnonce {
+export interface Utilisateur {
   mail: string;
   nom: string;
   image_url: string;
@@ -47,7 +58,7 @@ export interface AnnonceAttente {
   date_debut: Date;
   date_fin: Date;
   besoin_aide: boolean;
-  utilisateur: UtilisateurAnnonce;
+  utilisateur: Utilisateur;
 }
 
 export interface Annonce {
@@ -208,4 +219,19 @@ interface Geometry {
 
 interface Properties {
   label: string;
+}
+
+export interface updateProfil {
+  nom: string;
+  adresse: Adresse;
+}
+
+export interface updateEmail {
+  newMail: string;
+  mdp: string;
+}
+
+export interface updatePassword {
+  mdp: string;
+  newMdp: string;
 }
