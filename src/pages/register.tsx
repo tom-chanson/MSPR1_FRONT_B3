@@ -193,9 +193,14 @@ function Register() {
               setErrorPassword={setErrorPassword}
               errorPassword={errorPassword}
             />
+            <div className="input-container">
+              <input type="checkbox" required />
+                <span className="checkbox-text">En soumettant ce formulaire, j'accepte les conditions générales d'utilisations du site Arosa-je
+                </span>
+            </div>
             <button
-              type="submit"
-              className="btn-auth-form btn-auth-form-submit"
+                type="submit"
+                className="btn-auth-form btn-auth-form-submit"
               disabled={disabled}
             >
               {loading ? (
