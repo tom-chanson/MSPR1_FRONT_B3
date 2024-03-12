@@ -17,6 +17,7 @@ import { RequestHelperAuth, useAuth } from "../helpers/request";
 import { emailRegex, route_api } from "../constants";
 import useSignOut from "react-auth-kit/hooks/useSignOut";
 import { useNavigate } from "react-router-dom";
+import ModalProfil from "../components/profil/modalProfil";
 
 export default function ProfilUser() {
   const signOut = useSignOut();
@@ -254,6 +255,8 @@ export default function ProfilUser() {
 
   const [modalOpenCurrentPasswor, setModalOpenCurrentPassword] =
     useState(false);
+  const [modalOpenDataRecovery, setModalOpenDataRecovery] =
+      useState(false);
 
   //sélection du ref target
   const [formTarget, setFormTarget] =
@@ -431,6 +434,17 @@ export default function ProfilUser() {
                 />
               </div>
             </form>
+            <div  className="input-container">
+                <Button
+                    variant="contained"
+                    color="warning"
+                    onClick={() => setModalOpenDataRecovery(true)}
+                >
+                    Récupérer mes données
+                </Button>
+            </div>
+
+
             <form
               className="section section-delete"
               ref={refDelete}
@@ -479,6 +493,10 @@ export default function ProfilUser() {
           </div>
         </div>
       </Modal>
+        <ModalProfil
+            modalOpen={modalOpenDataRecovery}
+            setModalOpen={setModalOpenDataRecovery}
+        />
     </div>
   );
 }
