@@ -67,7 +67,7 @@ export default function InputAdress(props: {
       loadingText="Recherche en cours..."
       id="adresse"
       open={open}
-      value={props.adresse ? props.adresse.adresse : ""}
+      value={props.adresse ? props.adresse.adresse : undefined}
       disabled={props.disabled}
       isOptionEqualToValue={(option, value) => {
         return option === value || value === "";
@@ -79,6 +79,7 @@ export default function InputAdress(props: {
         setOpen(false);
       }}
       onChange={(event, value) => {
+        console.log(value);
         if (value === null || value === "") {
           props.setAdresse({
             latitude: "0",
@@ -90,6 +91,9 @@ export default function InputAdress(props: {
         const adresse = responseData.find(
           (adresse) => adresse.properties.label === value
         );
+        console.log("addresse");
+        console.log(adresse);
+        console.log(props.adresse ? props.adresse.adresse : "");
         if (adresse) {
           props.setAdresse({
             latitude: adresse.geometry.coordinates[1].toString(),
