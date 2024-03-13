@@ -58,7 +58,7 @@ function RequestAuthHelper<T>(
       ...headers,
     },
     data: data,
-    baseURL: API_URL,
+    baseURL: API_URL(),
     timeout: 90000,
   };
   console.log(config);
