@@ -90,7 +90,7 @@ export default function Home() {
       </div>
       <div className="containerButton">
         <Button
-          label="Me localiser"
+          label="Plantes près de chez moi"
           color="#456654"
           textSize="20px"
           onClick={updateUserPosition}
