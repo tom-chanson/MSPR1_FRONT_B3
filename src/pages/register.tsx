@@ -195,12 +195,17 @@ function Register() {
             />
             <div className="input-container">
               <input type="checkbox" required />
-                <span className="checkbox-text">En soumettant ce formulaire, j'accepte les conditions générales d'utilisations du site Arosa-je
-                </span>
+              <span className="checkbox-text">
+                En soumettant ce formulaire, j'accepte les{" "}
+                <Link to="/cgu" target="_blank">
+                  Conditions Générales d'Utilisation
+                </Link>{" "}
+                du site Arosa-je
+              </span>
             </div>
             <button
-                type="submit"
-                className="btn-auth-form btn-auth-form-submit"
+              type="submit"
+              className="btn-auth-form btn-auth-form-submit"
               disabled={disabled}
             >
               {loading ? (
