@@ -1,0 +1,33 @@
+@import url("color.css");
+
+.cgu-container {
+  padding: 1rem;
+  background-color: var(--primary-color);
+  overflow: auto;
+
+  .cgu {
+    border-radius: 5px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+    margin: 0.5rem;
+    padding: 1.5rem;
+    background-color: var(--white);
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+    }
+
+    a {
+      color: var(--primary);
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  }
+}

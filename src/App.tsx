@@ -20,6 +20,7 @@ import { SnackbarProvider, closeSnackbar } from "notistack";
 import { MdClose } from "react-icons/md";
 import { Profil } from "./pages/profil";
 import UserProfile from "./pages/profilUser";
+import CGU from "./pages/cgu";
 
 const store = createStore<IUserData>({
   authName: "_auth",
@@ -48,6 +49,7 @@ function App() {
         >
           <Routes>
             <Route path="/" element={<Home />} id="home" />
+            <Route path="/cgu" element={<CGU />} id="cgu" />
             <Route path="/login" element={<Login />} id="login" />
             <Route path="/register" element={<Register />} id="register" />
             <Route
