@@ -1,8 +1,10 @@
-const currentHostname = window.location.hostname;
-export const API_URL =
-  currentHostname === "tom-chanson.github.io"
-    ? "https://msprjavab3-production.up.railway.app/"
-    : "http://localhost:8080";
+export let API_URL = () => {
+  if (window.location.hostname === "tom-chanson.github.io") {
+    return "https://msprjavab3-production.up.railway.app/";
+  } else {
+    return "http://localhost:8080";
+  }
+};
 
 export const templateArticle = `# [Nom de la plante]
 ...
